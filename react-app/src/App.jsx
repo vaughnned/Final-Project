@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Carousel } from "@mantine/carousel";
+import { useDisclosure } from "@mantine/hooks";
+import { Burger } from "@mantine/core";
 // import { BrowserRouter } from "react-router-dom";
+
+// function DropDown() {
+//   const [opened, { toggle }] = useDisclosure(false);
+//   const label = opened ? "Close navigation" : "Open navigation";
+// }
 
 const App = () => {
   let [gameData, setGameData] = useState([]);
   let [gameImage, setGameImage] = useState([]);
   let [gameDesc, setGameDesc] = useState([]);
 
+  const [opened, { toggle }] = useDisclosure(false);
+  const label = opened ? "Close navigation" : "Open navigation";
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getGames = async () => {
       try {
         let response = await fetch(
-          "https://api.boardgameatlas.com/api/search?&limit=3&random=True&client_id=4Hi148hUNY"
+          "https://api.boardgameatlas.com/api/search?name=Do&limit=3&random=True&client_id=4Hi148hUNY"
         );
         let gameListData = await response.json();
         let game1 = gameListData.games[0].handle;
@@ -34,24 +44,33 @@ const App = () => {
     };
     getGames(gameData);
   }, []);
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
   return (
     <>
       <header>
-        <a id="home" href="http://localhost:5173/">
+        <a class="pagenav" href="http://localhost:5173/">
           Home
         </a>
         {/* <BrowserRouter basename="/app"> */}
         {/* <Route path="/Collection"> */}
-        <a id="home">Collection</a>
+        <a class="pagenav">Collection</a>
         {/* </Route> */}
         {/* </BrowserRouter> */}
         <nav id="head">
           <div>Friends</div>
           <div>Profile</div>
-          <div>Drop Down</div>
+          <div>
+            <Burger
+              margin="0"
+              color="#FFFFFF"
+              opened={opened}
+              onClick={toggle}
+              aria-label={label}
+            />
+          </div>
         </nav>
       </header>
       <h1 id="title">Board Game App</h1>
@@ -62,30 +81,30 @@ const App = () => {
       <div id="carousel">
         <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
           <Carousel.Slide>
-            <h1 className="gametitle">{gameData[0]}</h1>
+            <h1 className="gametitle">{gameData[0].toUpperCase()}</h1>
             <img className="gameimage" src={gameImage[0]} alt="" />
           </Carousel.Slide>
           <Carousel.Slide>
-            <h1 className="gametitle">{gameData[1]}</h1>
+            <h1 className="gametitle">{gameData[1].toUpperCase()}</h1>
             <img className="gameimage" src={gameImage[1]} alt="" />
           </Carousel.Slide>
           <Carousel.Slide>
-            <h1 className="gametitle">{gameData[2]}</h1>
+            <h1 className="gametitle">{gameData[2].toUpperCase()}</h1>
             <img className="gameimage" src={gameImage[2]} alt="" />
           </Carousel.Slide>
         </Carousel>
       </div>
       <div id="card-list">
         <div>
-          <h1>{gameData[0]}</h1>
+          <h1>{gameData[0].toUpperCase()}</h1>
           <p>{gameDesc[0]}</p>
         </div>
         <div>
-          <h1>{gameData[1]}</h1>
+          <h1>{gameData[1].toUpperCase()}</h1>
           <p>{gameDesc[1]}</p>
         </div>
         <div>
-          <h1>{gameData[2]}</h1>
+          <h1>{gameData[2].toUpperCase()}</h1>
           <p>{gameDesc[2]}</p>
         </div>
       </div>
