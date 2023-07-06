@@ -1,7 +1,62 @@
-#root {
-  max-width: 1280px;
+#head {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.gametitle {
+  font-size: 30px;
+}
+
+.gameimage {
+  height: 200px;
+  max-height: 500px;
+  width: 300px;
+}
+
+#head div {
+  margin: 10px;
+}
+
+#home {
+  float: left;
+  margin: 10px;
+  color: lightblue;
+}
+
+#carousel {
+  border: solid 1px white;
+  width: 80%;
   margin: 0 auto;
-  padding: 2rem;
+  height: 300px;
+}
+
+#card-list {
+  display: flex;
+
+  justify-content: space-around;
+  width: 80%;
+  margin: 30px auto;
+  height: 300px;
+}
+
+#card-list div {
+  border: solid 1px yellow;
+  border-radius: 5%;
+  width: 25%;
+  overflow: scroll;
+  padding: 5px;
+}
+
+body {
+  margin: 0px;
+}
+
+#root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  /* padding: 2rem; */
   text-align: center;
 }
 
