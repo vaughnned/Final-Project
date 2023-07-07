@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import CollectionPage from "./collection.jsx";
 import { Carousel } from "@mantine/carousel";
 import { useDisclosure } from "@mantine/hooks";
 import { Burger } from "@mantine/core";
-// import { BrowserRouter } from "react-router-dom";
-
 // function DropDown() {
 //   const [opened, { toggle }] = useDisclosure(false);
 //   const label = opened ? "Close navigation" : "Open navigation";
@@ -23,12 +22,10 @@ const App = () => {
     const getGames = async () => {
       try {
         let response = await fetch(
-          "https://api.boardgameatlas.com/api/search?name=Do&limit=3&random=True&client_id=4Hi148hUNY"
+          "https://api.boardgameatlas.com/api/search?&limit=3&&client_id=4Hi148hUNY"
         );
         let gameListData = await response.json();
-        let game1 = gameListData.games[0].handle;
-        let game2 = gameListData.games[1].handle;
-        let game3 = gameListData.games[2].handle;
+
         for (let i = 0; i < 3; i++) {
           gameData[i] = gameListData.games[i].handle;
           gameImage[i] = gameListData.games[i].image_url;
@@ -51,14 +48,13 @@ const App = () => {
   return (
     <>
       <header>
-        <a class="pagenav" href="http://localhost:5173/">
+        <a className="pagenav" href="/">
           Home
         </a>
-        {/* <BrowserRouter basename="/app"> */}
-        {/* <Route path="/Collection"> */}
-        <a class="pagenav">Collection</a>
-        {/* </Route> */}
-        {/* </BrowserRouter> */}
+        <a className="pagenav" href="/Collection">
+          Collection
+        </a>
+
         <nav id="head">
           <div>Friends</div>
           <div>Profile</div>
@@ -111,5 +107,9 @@ const App = () => {
     </>
   );
 };
+
+function Collection() {
+  return <h2>Collection</h2>;
+}
 
 export default App;
