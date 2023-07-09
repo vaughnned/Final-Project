@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('/dj-rest-auth/login/', get_login)
     # path('accounts/', include("django.contrib.auth.urls")),
 
 ]

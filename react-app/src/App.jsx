@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import CollectionPage from "./collection.jsx";
+// import CollectionPage from "./collection.jsx";
 import { Carousel } from "@mantine/carousel";
 import { useDisclosure } from "@mantine/hooks";
 import { Burger } from "@mantine/core";
