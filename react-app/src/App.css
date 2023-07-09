@@ -1,3 +1,13 @@
+.game-grid {
+  background-color: white;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10px auto;
+  gap: 20px;
+}
+
 #head {
   height: 40px;
   display: flex;

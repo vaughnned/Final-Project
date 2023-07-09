@@ -1,115 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-// import CollectionPage from "./collection.jsx";
 import { Carousel } from "@mantine/carousel";
-import { useDisclosure } from "@mantine/hooks";
-import { Burger } from "@mantine/core";
-// function DropDown() {
-//   const [opened, { toggle }] = useDisclosure(false);
-//   const label = opened ? "Close navigation" : "Open navigation";
-// }
+import Header from "./Header";
 
 const App = () => {
-  let [gameData, setGameData] = useState([]);
-  let [gameImage, setGameImage] = useState([]);
-  let [gameDesc, setGameDesc] = useState([]);
+  let [games, setGames] = useState([]);
+  let searchRef = useRef("");
 
-  const [opened, { toggle }] = useDisclosure(false);
-  const label = opened ? "Close navigation" : "Open navigation";
+  const getGames = async () => {
+    let query = searchRef.current.value;
+    console.log(query);
+    try {
+      let response = await fetch(
+        `https://api.boardgameatlas.com/api/search?&name=${query}&fuzzy_match=true&limit=9&&client_id=4Hi148hUNY`
+      );
+      const jsonData = await response.json();
 
-  const [loading, setLoading] = useState(true);
+      setGames(jsonData.games);
+      console.log(games);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const getGames = async () => {
-      try {
-        let response = await fetch(
-          "https://api.boardgameatlas.com/api/search?&limit=3&&client_id=4Hi148hUNY"
-        );
-        let gameListData = await response.json();
-
-        for (let i = 0; i < 3; i++) {
-          gameData[i] = gameListData.games[i].handle;
-          gameImage[i] = gameListData.games[i].image_url;
-          gameDesc[i] = gameListData.games[i].description_preview;
-        }
-        console.log(gameListData.games);
-        setTimeout(() => {
-          setLoading(false);
-        }, 10);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getGames(gameData);
+    getGames();
   }, []);
 
-  if (loading) {
-    return <h1>Loading...</h1>;
+  function search(e) {
+    e.preventDefault();
+    getGames();
   }
+
   return (
     <>
-      <header>
-        <a className="pagenav" href="/">
-          Home
-        </a>
-        <a className="pagenav" href="/Collection">
-          Collection
-        </a>
-
-        <nav id="head">
-          <div>Friends</div>
-          <div>Profile</div>
-          <div>
-            <Burger
-              margin="0"
-              color="#FFFFFF"
-              opened={opened}
-              onClick={toggle}
-              aria-label={label}
-            />
-          </div>
-        </nav>
-      </header>
+      <Header />
       <h1 id="title">Board Game App</h1>
       <p>
         Welcome to "insert name here"! Here you can share your love for board
         games with friends and see whose collection is more impressive!
       </p>
+
+      {/* Search Feature */}
+      <form onSubmit={search}>
+        <input ref={searchRef} type="text" placeholder="Search... " />
+        <button type="submit">Search</button>
+      </form>
+
       <div id="carousel">
         <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
-          <Carousel.Slide>
-            <h1 className="gametitle">{gameData[0].toUpperCase()}</h1>
-            <img className="gameimage" src={gameImage[0]} alt="" />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <h1 className="gametitle">{gameData[1].toUpperCase()}</h1>
-            <img className="gameimage" src={gameImage[1]} alt="" />
-          </Carousel.Slide>
-          <Carousel.Slide>
-            <h1 className="gametitle">{gameData[2].toUpperCase()}</h1>
-            <img className="gameimage" src={gameImage[2]} alt="" />
-          </Carousel.Slide>
+          {games.map((game, index) => (
+            <Carousel.Slide key={index}>
+              <a href={`/Detail/${game.id}`}>
+                <h1 className="gametitle">{game.handle.toUpperCase()}</h1>
+                <img className="gameimage" src={game.image_url} alt="" />
+              </a>
+            </Carousel.Slide>
+          ))}
         </Carousel>
       </div>
-      <div id="card-list">
+      {/* <div id="card-list">
         <div>
-          <h1>{gameData[0].toUpperCase()}</h1>
+          <h1>{gameHandle[0].toUpperCase()}</h1>
           <p>{gameDesc[0]}</p>
         </div>
         <div>
-          <h1>{gameData[1].toUpperCase()}</h1>
+          <h1>{gameHandle[1].toUpperCase()}</h1>
           <p>{gameDesc[1]}</p>
         </div>
         <div>
-          <h1>{gameData[2].toUpperCase()}</h1>
+          <h1>{gameHandle[2].toUpperCase()}</h1>
           <p>{gameDesc[2]}</p>
         </div>
+      </div> */}
+      <div className="game-grid">
+        {games.map((game, index) => (
+          <a key={index} href={`/Detail/${game.id}`}>
+            <img className="gameimage" src={game.image_url} alt="" />
+          </a>
+        ))}
       </div>
     </>
   );
 };
-
-function Collection() {
-  return <h2>Collection</h2>;
-}
 
 export default App;
