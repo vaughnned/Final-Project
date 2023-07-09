@@ -73,6 +73,8 @@ const App = () => {
           <p>{gameDesc[2]}</p>
         </div>
       </div> */}
+
+      {/* Make this a component for re-use */}
       <div className="game-grid">
         {games.map((game, index) => (
           <a key={index} href={`/Detail/${game.id}`}>
