@@ -42,8 +42,13 @@ const App = () => {
       </p>
 
       {/* Search Feature */}
-      <form onSubmit={search}>
-        <input ref={searchRef} type="text" placeholder="Search... " />
+      <form onSubmit={search} className="search-form">
+        <input
+          className="search-bar"
+          ref={searchRef}
+          type="text"
+          placeholder="Search for a game... "
+        />
         <button type="submit">Search</button>
       </form>
 

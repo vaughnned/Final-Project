@@ -17,7 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Detail/:gameId" element={<GameDetail />} />
       </Routes>
     </BrowserRouter>
-    {/* <App /> */}
-    {/* <Collection /> */}
   </React.StrictMode>
 );
