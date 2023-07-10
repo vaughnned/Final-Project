@@ -11,6 +11,7 @@ const App = () => {
     let query = searchRef.current.value;
     console.log(query);
     try {
+      // make an object such as INITIAL_DATA (my own personal json file) and copy over the fetch results
       let response = await fetch(
         `https://api.boardgameatlas.com/api/search?&name=${query}&fuzzy_match=true&limit=9&&client_id=4Hi148hUNY`
       );

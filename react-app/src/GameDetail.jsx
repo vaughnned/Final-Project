@@ -3,7 +3,6 @@ import "./App.css";
 import Header from "./Header";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 
 function GameDetail() {
   const [game, setGame] = useState();
@@ -41,19 +40,9 @@ function GameDetail() {
     getPrice();
   }, [gameId]);
 
-  //   let storeName = ;
-
-  //   while (priceList[0]?.name.includes(game.name)) {
-
-  //   }
-
-  //   const storeName = priceList[0]?.name.includes(game.name);
-  //   const storeName2 = priceList[1]?.name.includes(game.name);
-
   const storeName = priceList.filter((item) => item.name.includes(game.name));
 
   console.log(storeName);
-  //   console.log(game);
 
   if (!game) {
     return <h2>Loading...</h2>;
@@ -61,7 +50,9 @@ function GameDetail() {
   return (
     <>
       <Header />
-      <h1>{game?.handle.toUpperCase()}</h1>
+      <div className="detail-title">
+        <h1>{game?.handle.toUpperCase()}</h1>
+      </div>
       <img className="gameimage" src={game.image_url} alt="" />
       <div className="game-desc">
         <p>{game.description_preview}</p>
@@ -74,7 +65,6 @@ function GameDetail() {
           </h2>
           <h3 className="price-name">{storeName[0]?.name}</h3>
           <p className="price-number">{storeName[0]?.price_text}</p>
-          <meta property="og:url" content={game.image_url} />
         </div>
         <div>
           <h2>
@@ -82,7 +72,6 @@ function GameDetail() {
           </h2>
           <h3 className="price-name">{storeName[1]?.name}</h3>
           <p className="price-number">{storeName[1]?.price_text}</p>
-          <meta property="og:url" content={game.image_url} />
         </div>
         <div>
           <h2>
@@ -90,7 +79,6 @@ function GameDetail() {
           </h2>
           <h3 className="price-name">{storeName[2]?.name}</h3>
           <p className="price-number">{storeName[2]?.price_text}</p>
-          <meta property="og:url" content={game.image_url} />
         </div>
       </section>
     </>

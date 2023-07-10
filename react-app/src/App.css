@@ -1,5 +1,4 @@
 .game-grid {
-  background-color: white;
   width: 80%;
   display: flex;
   justify-content: space-around;
@@ -8,8 +7,30 @@
   gap: 20px;
 }
 
+.game-grid a {
+  background-color: white;
+  padding: 10px;
+  border: solid 3px black;
+}
+
+.detail-title {
+  width: 30%;
+  height: 100px;
+  margin: 0 auto;
+  background-color: gray;
+  text-align: center;
+  border: solid 5px rgb(23, 29, 29);
+}
+
+.detail-title h1 {
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  line-height: 2;
+}
+
 .game-desc {
-  font-size: 25px;
+  font-size: 20px;
   width: 80%;
   margin: 0 auto;
 }
@@ -41,6 +62,7 @@
   height: 300px;
   padding: 10px;
   border: solid 5px rgb(167, 108, 108);
+  overflow: scroll;
 }
 
 .game-prices div a {
