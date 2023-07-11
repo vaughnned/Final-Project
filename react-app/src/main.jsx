@@ -11,6 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter basename="/">
       <Routes>
+        {/* define a secure route */}
         <Route path="/" element={<App />} />
         <Route path="/Collection" element={<CollectionPage />} />
         <Route path="/Login" element={<HandleLogin />} />

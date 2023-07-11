@@ -1,12 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import useLocalStorage from "./UseLocalStorage";
 
 const LoginComponent = () => {
   const [isValid, setIsValid] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [user, setUser, removeUser] = useLocalStorage("user");
   const navigate = useNavigate();
 
   const handleUsernameInput = (e) => {
@@ -16,7 +19,7 @@ const LoginComponent = () => {
     setPassword(e.target.value);
   };
 
-  const handleSignUp = async (e) => {
+  const handleLogIn = async (e) => {
     e.preventDefault();
 
     console.log("something");
@@ -43,7 +46,11 @@ const LoginComponent = () => {
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
-      setIsValid(true);
+      setUser({
+        firstName: "Vaughn",
+        email: "vaughn@nedderman.com",
+        token: data.key,
+      });
       Cookies.set("Authorization", `Token ${data.key}`);
       navigate("/");
     }
@@ -52,8 +59,9 @@ const LoginComponent = () => {
   };
   return (
     <>
+      <Header />
       <h1>Login</h1>
-      <form onSubmit={handleSignUp}>
+      <form onSubmit={handleLogIn}>
         <input
           type="text"
           placeholder="username"

@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./Header";
 
 function CollectionPage() {
+  // make a useEffect and redirect if user isnt logged in
   return (
     <>
       <Header />

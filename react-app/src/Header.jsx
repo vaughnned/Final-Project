@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import useLocalStorage from "./UseLocalStorage";
 
 export default function Header() {
-  let [user, setUser] = useState("");
+  let [user, setUser, removeUser] = useLocalStorage("user");
   const [opened, { toggle }] = useDisclosure(false);
   const label = opened ? "Close navigation" : "Open navigation";
 
@@ -13,16 +14,16 @@ export default function Header() {
   // }
 
   function logout() {
-    setUser(null);
+    removeUser();
   }
 
-  function login() {
-    setUser({ firstName: "Vaughn", email: "vaughn@nedderman.com" });
-  }
+  // function login() {
+  //   setUser({ firstName: "Vaughn", email: "vaughn@nedderman.com" });
+  // }
   return (
     <>
       <header id="header">
-        {user ? (
+        {user?.token ? (
           <>
             <a className="pagenav" href="/">
               Home
@@ -50,9 +51,7 @@ export default function Header() {
             </>
           ) : (
             <div>
-              <a href="#" onClick={login}>
-                Login
-              </a>
+              <a href="/login">Login</a>
             </div>
           )}
           <div>
