@@ -1,33 +1,75 @@
-import { useEffect } from "react";
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
-function HandleLogin() {
-  useEffect(() => {
-    const getLogin = async () => {
-      try {
-        let response = await fetch(
-          "http://127.0.0.1:8000/dj-rest-auth/login/",
-          { method: "GET" }
-        );
-        let loginData = await response.json();
-        console.log(loginData);
-      } catch (error) {
-        console.error(error);
-      }
+const LoginComponent = () => {
+  const [isValid, setIsValid] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleUsernameInput = (e) => {
+    setUsername(e.target.value);
+  };
+  const handlePasswordInput = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    console.log("something");
+    const options = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
     };
-    getLogin();
-  }, []);
-  //   const response = await fetch("http://127.0.0.1:8000/dj-rest-auth/login/");
-  //   console.log(response);
 
-  // if login is valid
+    const response = await fetch(
+      "http://localhost:8000/dj-rest-auth/login/",
+      options
+    ).catch((error) => {
+      console.error("THIS ISNT WORKING", error);
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      alert("Incorrect username or password");
+    } else {
+      setIsValid(true);
+      Cookies.set("Authorization", `Token ${data.key}`);
+      navigate("/");
+    }
+
+    // if login is valid
+  };
   return (
     <>
       <h1>Login</h1>
+      <form onSubmit={handleSignUp}>
+        <input
+          type="text"
+          placeholder="username"
+          value={username}
+          onChange={(e) => handleUsernameInput(e)}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => handlePasswordInput(e)}
+        />
+        <input type="submit" />
+      </form>
     </>
   );
-  // else
-  //   return <h1>Login Invalid</h1>;
-}
+};
 
-export default HandleLogin;
+export default LoginComponent;

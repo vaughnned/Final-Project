@@ -22,12 +22,20 @@ export default function Header() {
   return (
     <>
       <header>
-        <a className="pagenav" href="/">
-          Home
-        </a>
-        <a className="pagenav" href="/Collection">
-          Collection
-        </a>
+        {user ? (
+          <>
+            <a className="pagenav" href="/">
+              Home
+            </a>
+            <a className="pagenav" href="/Collection">
+              Collection
+            </a>
+          </>
+        ) : (
+          <a className="pagenav" href="/">
+            Home
+          </a>
+        )}
 
         <nav id="head">
           {user ? (
@@ -47,7 +55,6 @@ export default function Header() {
               </a>
             </div>
           )}
-
           <div>
             <Burger
               margin="0"
