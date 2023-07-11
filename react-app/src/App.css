@@ -1,3 +1,8 @@
+#header {
+  background-color: gray;
+  border-bottom: solid 2px black;
+}
+
 .game-grid {
   width: 80%;
   display: flex;
@@ -87,6 +92,10 @@
   padding: 5px;
 }
 
+#head a {
+  color: white;
+}
+
 .gametitle {
   font-size: 30px;
 }
@@ -102,13 +111,14 @@
 }
 
 .pagenav {
-  padding: 5px;
+  padding: 2px 5px 0px 5px;
   float: left;
   margin: 10px;
   color: lightblue;
 }
 
 #carousel {
+  display: flex;
   border: solid 2px white;
   background-color: black;
   width: 80%;
@@ -122,8 +132,40 @@
   font-weight: bold;
 }
 
-#carousel:first-child {
+/* #carousel:first-child {
   background-color: white;
+} */
+
+#sort-button {
+  position: absolute;
+  left: 50px;
+}
+
+.collection-list {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  flex-wrap: wrap;
+  margin: 100px;
+}
+
+.collection-game {
+  width: 400px;
+  height: 400px;
+  margin-top: 20px;
+  border: solid 1px white;
+  border-radius: 10%;
+}
+
+.collection-title {
+  padding: 10px;
+  margin: 0px;
+  border-bottom: solid 1px white;
+}
+
+.collection-image {
+  height: 343px;
+  width: 100%;
 }
 
 #card-list {

@@ -13,7 +13,7 @@ const App = () => {
     try {
       // make an object such as INITIAL_DATA (my own personal json file) and copy over the fetch results
       let response = await fetch(
-        `https://api.boardgameatlas.com/api/search?&name=${query}&fuzzy_match=true&limit=9&&client_id=4Hi148hUNY`
+        `https://api.boardgameatlas.com/api/search?&name=${query}&fuzzy_match=true&limit=9&client_id=4Hi148hUNY`
       );
       const jsonData = await response.json();
 
@@ -64,21 +64,27 @@ const App = () => {
             </Carousel.Slide>
           ))}
         </Carousel>
+        <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
+          {games.map((game, index) => (
+            <Carousel.Slide key={index}>
+              <a href={`/Detail/${game.id}`}>
+                <h1 className="gametitle">{game.handle.toUpperCase()}</h1>
+                <img className="gameimage" src={game.image_url} alt="" />
+              </a>
+            </Carousel.Slide>
+          ))}
+        </Carousel>
+        <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
+          {games.map((game, index) => (
+            <Carousel.Slide key={index}>
+              <a href={`/Detail/${game.id}`}>
+                <h1 className="gametitle">{game.handle.toUpperCase()}</h1>
+                <img className="gameimage" src={game.image_url} alt="" />
+              </a>
+            </Carousel.Slide>
+          ))}
+        </Carousel>
       </div>
-      {/* <div id="card-list">
-        <div>
-          <h1>{gameHandle[0].toUpperCase()}</h1>
-          <p>{gameDesc[0]}</p>
-        </div>
-        <div>
-          <h1>{gameHandle[1].toUpperCase()}</h1>
-          <p>{gameDesc[1]}</p>
-        </div>
-        <div>
-          <h1>{gameHandle[2].toUpperCase()}</h1>
-          <p>{gameDesc[2]}</p>
-        </div>
-      </div> */}
 
       {/* Make this a component for re-use */}
       <div className="game-grid">

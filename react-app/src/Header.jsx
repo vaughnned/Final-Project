@@ -21,7 +21,7 @@ export default function Header() {
   }
   return (
     <>
-      <header>
+      <header id="header">
         {user ? (
           <>
             <a className="pagenav" href="/">
