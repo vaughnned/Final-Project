@@ -3,6 +3,19 @@
   border-bottom: solid 2px black;
 }
 
+#profile-reviews {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+#profile-reviews div {
+  height: 200px;
+  width: 45%;
+  border: solid 2px white;
+}
+
 .game-grid {
   width: 80%;
   display: flex;
@@ -195,7 +208,7 @@ body {
   text-align: center;
 }
 
-.logo {
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -206,16 +219,7 @@ body {
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {

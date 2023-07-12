@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import CollectionPage from "./MyCollection.jsx";
 import HandleLogin from "./Login";
 import GameDetail from "./GameDetail";
+import ProfilePage from "./Profile";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/Collection" element={<CollectionPage />} />
         <Route path="/Login" element={<HandleLogin />} />
         <Route path="/Detail/:gameId" element={<GameDetail />} />
+        <Route path="/Profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
