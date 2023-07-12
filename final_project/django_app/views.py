@@ -1,10 +1,14 @@
-from django.shortcuts import render
+import json
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from django.http import HttpResponseNotAllowed, JsonResponse
+from django.http import HttpResponseNotAllowed, HttpResponse
 from .models import GameModel
 from django.views.decorators.csrf import csrf_exempt
+from .serializers import GameSerializer
+from rest_framework.response import Response
+from rest_framework import generics
 
 
 # Create your views here.
@@ -16,27 +20,42 @@ from django.views.decorators.csrf import csrf_exempt
         # CustomUser.save()
 
 @csrf_exempt
-def add_to_collection(request):
-    print(request, "HERE")
-    print(request.body.image, "bodyyyyy")
-    print(request.image, "image")
+def add_game(request):
+    print(request.body, "HERE")
+    body = json.loads(request.body)
+    request_title = body['title']
+    request_image = body['image']
+
+    print(request_title)
+    print(request_image)
+
     if request.method == 'POST':
         data = GameModel.objects.create(
-            title=request.data['title'], image=request.data['image'])
-        return JsonResponse(data, content_type='application/json')
+            title=request_title, image=request_image)
+        
+        return HttpResponse(data, content_type='application/json')
     else:
         return HttpResponseNotAllowed(['POST'])
 
-# class MyTokenObtainPairView(TokenObtainPairView):
-#     serializer_class = MyTokenObtainPairSerializer
 
-# class MyTokenRefreshView(TokenRefreshView):
-#     serializer_class = MyTokenRefreshSerializer
 
-# user = authenticate(request, username="vaughn", password="password")
 
-# login(request, user)
 
-# logout(request)
+class GetGameView(generics.ListAPIView):
+    serializer_class = GameSerializer
+
+    def get_queryset(self):
+        return (GameModel.objects.all())
+    
+@csrf_exempt
+def delete_game(request, game_id):
+    game_record = get_object_or_404(GameModel, id=game_id)
+
+    if request.method == 'DELETE':
+        game_record.delete()
+        return HttpResponse(game_record, content_type='application/json')
+    else:
+        return HttpResponseNotAllowed(['DELETE'])
+
 
 

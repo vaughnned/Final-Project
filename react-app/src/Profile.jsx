@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Header from "./Header";
 
-const ProfileComponent = () => {
+const ProfileComponent = ({ game }) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [gameData, setGameData] = useState([]);
+
+  const gameId = gameData;
 
   const handleTitleInput = (e) => {
     setTitle(e.target.value);
@@ -15,13 +18,12 @@ const ProfileComponent = () => {
 
   console.log(title, image);
 
-  const createGame = (e) => {
+  const createGame = async (e) => {
     e.preventDefault();
-    fetch("http://127.0.0.1:8000/collection/", {
+    await fetch("http://127.0.0.1:8000/collection/", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        // "Access-Control-Allow-Origin": "http://localhost:5173/",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify({
@@ -30,6 +32,44 @@ const ProfileComponent = () => {
       }),
     });
   };
+
+  const getGame = async () => {
+    let response = await fetch(`http://127.0.0.1:8000/collection/`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    const data = await response.json();
+    console.log(data[0].id);
+
+    setGameData(data);
+  };
+
+  useEffect(() => {
+    getGame();
+  }, []);
+
+  const deleteGame = (gameId) => {
+    fetch(`http://127.0.0.1:8000/collection/${gameId}/`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          window.location.reload();
+          return response;
+        }
+      })
+      .catch((error) => {
+        console.error("THIS ISNT WORKING", error);
+      });
+  };
+  console.log(game);
 
   return (
     <>
@@ -52,6 +92,15 @@ const ProfileComponent = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      {gameData.map((game, index) => (
+        <div key={index}>
+          <h1>{game.title}</h1>
+          <p>{game.image}</p>
+          <button type="delete" onClick={() => deleteGame(game.id)}>
+            Remove
+          </button>
+        </div>
+      ))}
     </>
   );
 };

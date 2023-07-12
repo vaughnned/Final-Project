@@ -9,7 +9,10 @@ from django.contrib.auth.models import AbstractUser
 
 class GameModel(models.Model):
     title = models.TextField()
-    image = models.TextField()
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title
 
 class CollectionModel(models.Model):
     id = models.IntegerField(primary_key=True)

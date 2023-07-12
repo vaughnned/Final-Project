@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django_app.views import add_to_collection
+from django_app.views import add_game, GetGameView, delete_game
 
 
 urlpatterns = [
@@ -24,7 +24,11 @@ urlpatterns = [
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path("api-auth/", include("rest_framework.urls")),
     path("api_v1/", include("api.urls")),
-    path("collection/", add_to_collection, name="add_to_collection"),
+    path("add-game/", add_game, name="add_game"),
+    path("collection/", GetGameView.as_view(), name="GetGameView"),
+    path("collection/<int:game_id>/", delete_game, name="delete_game"),
+
+
     # path('api/auth/', include('authentication.urls')),  
     # path('/dj-rest-auth/login/', get_login)
     # path('accounts/', include("django.contrib.auth.urls")),
