@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./index.css";
+import "./styles/index.css";
 import Cookies from "js-cookie";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
-import CollectionPage from "./MyCollection.jsx";
+import CollectionPage from "./GameCollection/MyCollection.jsx";
 import HandleLogin from "./Login/Login";
 import GameDetail from "./GameDetail";
 import ProfileComponent from "./Profile";

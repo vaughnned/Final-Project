@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./styles/App.css";
 import Header from "./Header";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

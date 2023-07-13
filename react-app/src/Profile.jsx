@@ -1,34 +1,48 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Header from "./Header";
+import RenderCollection from "./GameCollection/RenderCollection";
+// import ImageUploadForm from "./ImageUpload";
 
-const ProfileComponent = ({ game }) => {
+const ProfileComponent = () => {
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [gameData, setGameData] = useState([]);
-
-  const gameId = gameData;
+  // const [image, setImage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadMessage, setUploadMessage] = useState("");
 
   const handleTitleInput = (e) => {
     setTitle(e.target.value);
   };
-  const handleImageUpload = (e) => {
-    setImage(e.target.value);
-  };
 
-  // console.log(title, image);
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0].name);
+  };
+  // console.log(selectedFile);
+
+  // if (!selectedFile) {
+  //   setUploadMessage("Select an image to display. ");
+  //   return;
+  // }
+
+  const formData = new FormData();
+  formData.append("image_file", selectedFile);
+
+  // const handleImageUpload = (e) => {
+  //   setImage(e.target.value);
+  // };
 
   const createGame = async (e) => {
     e.preventDefault();
     await fetch("http://127.0.0.1:8000/add-game/", {
       method: "POST",
+      data: formData,
       headers: {
         "content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify({
         title: title,
-        image: image,
+        image: selectedFile,
       }),
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
@@ -38,42 +52,7 @@ const ProfileComponent = ({ game }) => {
     });
   };
 
-  const getGame = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/collection/`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "X-CSRFToken": Cookies.get("csrftoken"),
-      },
-    });
-    const data = await response.json();
-    console.log(data[0].id);
-
-    setGameData(data);
-  };
-
-  useEffect(() => {
-    getGame();
-  }, []);
-
-  const deleteGame = (gameId) => {
-    fetch(`http://127.0.0.1:8000/collection/${gameId}/`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        "X-CSRFToken": Cookies.get("csrftoken"),
-      },
-    })
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          window.location.reload();
-          return response;
-        }
-      })
-      .catch((error) => {
-        console.error("THIS ISNT WORKING", error);
-      });
-  };
+  // console.log(title, image);
 
   return (
     <>
@@ -89,22 +68,13 @@ const ProfileComponent = ({ game }) => {
           placeholder="Title... "
           onChange={(e) => handleTitleInput(e)}
         />
-        <input
-          type="file"
-          placeholder="Image... "
-          onChange={(e) => handleImageUpload(e)}
-        />
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+
         <button type="submit">Submit</button>
+        <p>{uploadMessage}</p>
       </form>
-      {gameData.map((game, index) => (
-        <div key={index}>
-          <h1>{game.title}</h1>
-          <p>{game.image}</p>
-          <button type="delete" onClick={() => deleteGame(game.id)}>
-            Remove
-          </button>
-        </div>
-      ))}
+      <RenderCollection imageUrl={selectedFile} />
+      {/* <img className="collection-image" src={selectedFile} /> */}
     </>
   );
 };

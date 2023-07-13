@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./App.css";
+import "./styles/App.css";
 import { Carousel } from "@mantine/carousel";
 import Header from "./Header";
 
