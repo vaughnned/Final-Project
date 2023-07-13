@@ -16,11 +16,11 @@ const ProfileComponent = ({ game }) => {
     setImage(e.target.value);
   };
 
-  console.log(title, image);
+  // console.log(title, image);
 
   const createGame = async (e) => {
     e.preventDefault();
-    await fetch("http://127.0.0.1:8000/collection/", {
+    await fetch("http://127.0.0.1:8000/add-game/", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -30,6 +30,11 @@ const ProfileComponent = ({ game }) => {
         title: title,
         image: image,
       }),
+    }).then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        window.location.reload();
+        return response;
+      }
     });
   };
 
@@ -69,7 +74,6 @@ const ProfileComponent = ({ game }) => {
         console.error("THIS ISNT WORKING", error);
       });
   };
-  console.log(game);
 
   return (
     <>

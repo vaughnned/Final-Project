@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import useLocalStorage from "./UseLocalStorage";
+import Cookies from "js-cookie";
 
 export default function Header() {
   let [user, setUser, removeUser] = useLocalStorage("user");
@@ -15,6 +16,7 @@ export default function Header() {
 
   function logout() {
     removeUser();
+    Cookies.remove("Authorization");
   }
 
   // function login() {
@@ -42,7 +44,7 @@ export default function Header() {
           {user ? (
             <>
               <div>Friends</div>
-              <div>Profile</div>
+              <a href="/profile">Profile</a>
               <div>
                 <a href="#" onClick={logout}>
                   Logout

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
-import useLocalStorage from "./UseLocalStorage";
+import Header from "../Header";
+import useLocalStorage from "../UseLocalStorage";
 
 const LoginComponent = () => {
   const [isValid, setIsValid] = useState(false);
@@ -52,6 +52,7 @@ const LoginComponent = () => {
         token: data.key,
       });
       Cookies.set("Authorization", `Token ${data.key}`);
+      setIsValid(true);
       navigate("/");
     }
 
