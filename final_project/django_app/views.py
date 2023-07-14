@@ -22,7 +22,7 @@ from rest_framework import generics
 @csrf_exempt
 def add_game(request):
     print(request.body, "HERE")
-    body = json.loads(request.body)
+    body = request.body
     request_title = body['title']
     request_image = body['image']
 

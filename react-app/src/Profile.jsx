@@ -6,44 +6,71 @@ import RenderCollection from "./GameCollection/RenderCollection";
 
 const ProfileComponent = () => {
   const [title, setTitle] = useState("");
-  // const [image, setImage] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadMessage, setUploadMessage] = useState("");
+  const [state, setState] = useState({
+    title: "",
+    image: null,
+  });
 
   const handleTitleInput = (e) => {
-    setTitle(e.target.value);
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0].name);
+    const file = e.target.files[0];
+    setState((prevState) => ({
+      ...prevState,
+      image: file,
+    }));
   };
-  // console.log(selectedFile);
+
+  console.log(state);
+
+  console.log(title);
+  console.log(selectedFile);
 
   // if (!selectedFile) {
   //   setUploadMessage("Select an image to display. ");
   //   return;
   // }
 
-  const formData = new FormData();
-  formData.append("image_file", selectedFile);
-
   // const handleImageUpload = (e) => {
   //   setImage(e.target.value);
   // };
 
+  const handleImageSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8000/add-game/", {
+        method: "POST",
+        data: formData,
+      });
+      setUploadMessage("Image uploaded successfully. ");
+      // console.log(response.data);
+    } catch (error) {
+      setUploadMessage("Error uploading image.");
+      console.log(error);
+    }
+  };
+
   const createGame = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("image", state.image);
+    formData.append("title", state.title);
+    console.log(formData);
     await fetch("http://127.0.0.1:8000/add-game/", {
       method: "POST",
-      data: formData,
       headers: {
-        "content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
-      body: JSON.stringify({
-        title: title,
-        image: selectedFile,
-      }),
+      body: formData,
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         window.location.reload();
@@ -66,10 +93,11 @@ const ProfileComponent = () => {
         <input
           type="text"
           placeholder="Title... "
+          name="title"
           onChange={(e) => handleTitleInput(e)}
         />
         <input type="file" accept="image/*" onChange={handleFileChange} />
-
+        <button onClick={handleImageSubmit}>Upload Image</button>
         <button type="submit">Submit</button>
         <p>{uploadMessage}</p>
       </form>

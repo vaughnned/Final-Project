@@ -41,14 +41,14 @@ function RenderCollection({ imageUrl }) {
         console.error("THIS ISNT WORKING", error);
       });
   };
-  console.log(gameData);
+  console.log(imageUrl);
   return (
     <>
       {gameData.map((game, index) => (
         <div key={index}>
           <div className="collection-game">
             <h2 className="collection-title">{game.title}</h2>
-            <img className="collection-image" src={game.image} />
+            <img className="collection-image" src={imageUrl} />
           </div>
           <button type="delete" onClick={() => deleteGame(game.id)}>
             Remove

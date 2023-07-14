@@ -2,35 +2,30 @@ import React, { useState, useEffect, useRef } from "react";
 import "./styles/App.css";
 import { Carousel } from "@mantine/carousel";
 import Header from "./Header";
+import Game from "./Game";
+import { getGames } from "./utils/api";
 
 const Home = () => {
   let [games, setGames] = useState([]);
   let searchRef = useRef("");
 
-  const getGames = async () => {
-    let query = searchRef.current.value;
-    console.log(query);
-    try {
-      // make an object such as INITIAL_DATA (my own personal json file) and copy over the fetch results
-      let response = await fetch(
-        `https://api.boardgameatlas.com/api/search?&name=${query}&fuzzy_match=true&limit=9&client_id=4Hi148hUNY`
-      );
-      const jsonData = await response.json();
-
-      setGames(jsonData.games);
-      console.log(games);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // useEffect(() => {
+  //   getGames({ ids: ["08asLSfoZy"] }).then((g) => {
+  //     setGames(g);
+  //   });
+  // }, []);
 
   useEffect(() => {
-    getGames();
+    getGames().then((g) => {
+      setGames(g);
+    });
   }, []);
 
   function search(e) {
     e.preventDefault();
-    getGames();
+    getGames({ query: searchRef.current.value }).then((g) => {
+      setGames(g);
+    });
   }
 
   return (
@@ -88,10 +83,8 @@ const Home = () => {
 
       {/* Make this a component for re-use */}
       <div className="game-grid">
-        {games.map((game, index) => (
-          <a key={index} href={`/Detail/${game.id}`}>
-            <img className="gameimage" src={game.image_url} alt="" />
-          </a>
+        {games.map((game) => (
+          <Game game={game} key={game.id} owned={false} />
         ))}
       </div>
     </>
