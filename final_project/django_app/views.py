@@ -17,7 +17,7 @@ from rest_framework import generics
 #     if request.method == "POST":
 #         user = User.objects.create_user(username=request.username, password=request.password)
 #         print(user)
-        # CustomUser.save()
+#         CustomUser.save()
 
 @csrf_exempt
 def add_game(request):

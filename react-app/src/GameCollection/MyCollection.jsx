@@ -41,7 +41,7 @@ function CollectionPage() {
       <section className="collection-list">
         {/* map through database to display the user's game collection  */}
 
-        <div className="game-grid">
+        <div id="collection-grid" className="game-grid">
           {gameData.map((game) => (
             <div key={game.id}>
               <h1>{game.title}</h1>

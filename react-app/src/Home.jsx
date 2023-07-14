@@ -82,7 +82,7 @@ const Home = () => {
       </div> */}
 
       {/* Make this a component for re-use */}
-      <div className="game-grid">
+      <div id="home-grid" className="game-grid">
         {games.map((game) => (
           <Game game={game} key={game.id} owned={false} />
         ))}
