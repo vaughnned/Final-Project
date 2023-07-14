@@ -43,7 +43,7 @@ export default function Header() {
         <nav id="head">
           {user ? (
             <>
-              <div>Friends</div>
+              <a href="/friends">Friends</a>
               <a href="/profile">Profile</a>
               <div>
                 <a href="#" onClick={logout}>

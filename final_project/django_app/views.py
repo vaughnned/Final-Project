@@ -21,31 +21,32 @@ from rest_framework import generics
 
 @csrf_exempt
 def add_game(request):
-    print(request.body, "HERE")
     body = request.body
-    request_title = body['title']
-    request_image = body['image']
-
-    print(request_title)
-    print(request_image)
+    decoded_data = body.decode('utf-8')
+    json_data = json.loads(decoded_data)
+    print(json_data)
+    request_id = json_data['game_atlas_id']['gameId']
+    request_title = json_data['title']['gameTitle']
+    request_image = json_data['imageUrl']['gameImageUrl']
+    print(request_id)
+    print(request, "REQUEST")
 
     if request.method == 'POST':
         data = GameModel.objects.create(
-            title=request_title, image=request_image)
-        
-        return HttpResponse(data, content_type='application/json')
+            game_atlas_id=request_id, title=request_title, image_url=request_image)
+        print(data, "DATA")
+        return HttpResponse(json.dumps({'message': 'Data saved successfully'}), content_type='application/json')
     else:
         return HttpResponseNotAllowed(['POST'])
-
-
-
 
 
 class GetGameView(generics.ListAPIView):
     serializer_class = GameSerializer
 
     def get_queryset(self):
+        print(GameModel.objects.all(), "OBJECT")
         return (GameModel.objects.all())
+    
     
 @csrf_exempt
 def delete_game(request, game_id):

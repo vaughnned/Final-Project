@@ -20,13 +20,13 @@ from django_app.views import add_game, GetGameView, delete_game
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path("api-auth/", include("rest_framework.urls")),
     path("api_v1/", include("api.urls")),
     path("add-game/", add_game, name="add_game"),
     path("collection/", GetGameView.as_view(), name="GetGameView"),
     path("collection/<int:game_id>/", delete_game, name="delete_game"),
+    path('admin/', admin.site.urls),
 
 
     # path('api/auth/', include('authentication.urls')),  

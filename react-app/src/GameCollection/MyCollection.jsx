@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "../styles/App.css";
 import Header from "../Header";
-import RenderCollection from "./RenderCollection";
-import { getGames } from "../utils/api";
 import Game from "../Game";
+import Cookies from "js-cookie";
+import { deleteGame } from "./CollectionCrud";
 
 function CollectionPage() {
-  let [games, setGames] = useState([]);
+  const [games, setGames] = useState([]);
+  const [gameData, setGameData] = useState([]);
+  console.log(games, "here");
 
   useEffect(() => {
+    const getUserGames = async () => {
+      let response = await fetch(`http://127.0.0.1:8000/collection/`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          "X-CSRFToken": Cookies.get("csrftoken"),
+        },
+      });
+      console.log("RESPONSE");
+      const data = await response.json();
+      console.log(data, "Get Game");
+      setGameData(data);
+    };
+    getUserGames();
     // load game ids from the game model
-    getGames({ ids: ["08asLSfoZy"] }).then((g) => {
-      setGames(g);
-    });
+    console.log({ gameData }, "GAMEDATA");
+    // getGames({ ids: gameData }).then((g) => {
+    //   setGames(g);
+    // });
   }, []);
   // make a useEffect and redirect if user isnt logged in
   return (
@@ -23,10 +40,14 @@ function CollectionPage() {
       <button id="sort-button">Sort By</button>
       <section className="collection-list">
         {/* map through database to display the user's game collection  */}
-        {/* <RenderCollection /> */}
+
         <div className="game-grid">
-          {games.map((game) => (
-            <Game game={game} key={game.id} />
+          {gameData.map((game) => (
+            <div key={game.id}>
+              <h1>{game.title}</h1>
+              <Game game={game} />
+              <button onClick={() => deleteGame(game.id)}>Delete</button>
+            </div>
           ))}
         </div>
       </section>

@@ -1,4 +1,6 @@
 export const getGames = async ({ query = "", ids = [] } = {}) => {
+  console.log({ query });
+  console.log({ ids });
   try {
     // make an object such as INITIAL_DATA (my own personal json file) and copy over the fetch results
     let response = await fetch(

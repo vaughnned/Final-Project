@@ -59,25 +59,27 @@ const LoginComponent = () => {
     // if login is valid
   };
   return (
-    <>
+    <div id="login-page">
       <Header />
-      <h1>Login</h1>
-      <form onSubmit={handleLogIn}>
-        <input
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => handleUsernameInput(e)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => handlePasswordInput(e)}
-        />
-        <input type="submit" />
-      </form>
-    </>
+      <section id="login-form">
+        <h1>Login</h1>
+        <form className="login-inputs" onSubmit={handleLogIn}>
+          <input
+            type="text"
+            placeholder="username"
+            value={username}
+            onChange={(e) => handleUsernameInput(e)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => handlePasswordInput(e)}
+          />
+          <input id="submit-button" type="submit" />
+        </form>
+      </section>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./styles/App.css";
-import { Carousel } from "@mantine/carousel";
+// import { Carousel } from "@mantine/carousel";
 import Header from "./Header";
 import Game from "./Game";
 import { getGames } from "./utils/api";
@@ -48,7 +48,7 @@ const Home = () => {
         <button type="submit">Search</button>
       </form>
 
-      <div id="carousel">
+      {/* <div id="carousel">
         <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
           {games.map((game, index) => (
             <Carousel.Slide key={index}>
@@ -79,7 +79,7 @@ const Home = () => {
             </Carousel.Slide>
           ))}
         </Carousel>
-      </div>
+      </div> */}
 
       {/* Make this a component for re-use */}
       <div className="game-grid">

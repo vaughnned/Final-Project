@@ -8,6 +8,7 @@ import HandleLogin from "./Login/Login";
 import GameDetail from "./GameDetail";
 import ProfileComponent from "./Profile";
 import Protected from "./Login/Protected";
+import FriendsList from "./Friends";
 
 function App() {
   const cookie = Cookies.get("Authorization");
@@ -33,6 +34,14 @@ function App() {
           element={
             <Protected isLoggedIn={cookie}>
               <ProfileComponent />
+            </Protected>
+          }
+        />
+        <Route
+          path="/Friends"
+          element={
+            <Protected isLoggedIn={cookie}>
+              <FriendsList />
             </Protected>
           }
         />

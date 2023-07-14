@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Header from "./Header";
-import RenderCollection from "./GameCollection/RenderCollection";
-// import ImageUploadForm from "./ImageUpload";
 
 const ProfileComponent = () => {
   const [title, setTitle] = useState("");
@@ -79,8 +77,6 @@ const ProfileComponent = () => {
     });
   };
 
-  // console.log(title, image);
-
   return (
     <>
       <Header />
@@ -101,7 +97,7 @@ const ProfileComponent = () => {
         <button type="submit">Submit</button>
         <p>{uploadMessage}</p>
       </form>
-      <RenderCollection imageUrl={selectedFile} />
+
       {/* <img className="collection-image" src={selectedFile} /> */}
     </>
   );
