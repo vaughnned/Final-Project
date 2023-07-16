@@ -1,0 +1,12 @@
+#profile-reviews {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+#profile-reviews div {
+  height: 200px;
+  width: 45%;
+  border: solid 2px white;
+}

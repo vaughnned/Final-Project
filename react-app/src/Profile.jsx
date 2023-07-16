@@ -86,15 +86,15 @@ const ProfileComponent = () => {
         <div>Review 2</div>
       </section>
       <form onSubmit={createGame}>
-        <input
+        {/* <input
           type="text"
           placeholder="Title... "
           name="title"
           onChange={(e) => handleTitleInput(e)}
-        />
+        /> */}
         <input type="file" accept="image/*" onChange={handleFileChange} />
         <button onClick={handleImageSubmit}>Upload Image</button>
-        <button type="submit">Submit</button>
+        {/* <button type="submit">Submit</button> */}
         <p>{uploadMessage}</p>
       </form>
 

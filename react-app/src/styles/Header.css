@@ -1,0 +1,24 @@
+#header {
+  background-color: #ce5c27;
+  border-bottom: solid 2px black;
+}
+
+.pagenav {
+  padding: 2px 5px 0px 5px;
+  float: left;
+  margin: 10px;
+  color: white;
+}
+
+#head {
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px;
+}
+
+#head a {
+  margin: 10px;
+  color: white;
+}

@@ -53,7 +53,7 @@ function GameDetail() {
       <div className="detail-title">
         <h1>{game?.handle.toUpperCase()}</h1>
       </div>
-      <img className="gameimage" src={game.image_url} alt="" />
+      <img className="gameimage game-grid" src={game.image_url} alt="" />
       <div className="game-desc">
         <p>{game.description_preview}</p>
       </div>

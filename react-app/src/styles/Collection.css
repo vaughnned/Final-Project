@@ -1,0 +1,15 @@
+#collection-grid div div {
+  background-color: white;
+  box-shadow: none;
+}
+
+#collection-grid div {
+  background-color: #f5c08e;
+}
+
+#collection-grid div h1 {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

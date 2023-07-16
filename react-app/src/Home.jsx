@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./styles/App.css";
+import "./styles/Header.css";
+import "./styles/Profile.css";
+import "./styles/Collection.css";
+import "./styles/Login.css";
+
 // import { Carousel } from "@mantine/carousel";
 import Header from "./Header";
 import Game from "./Game";
@@ -32,7 +37,7 @@ const Home = () => {
     <>
       <Header />
       <h1 id="title">Board Game App</h1>
-      <p>
+      <p id="page-desc">
         Welcome to "insert name here"! Here you can share your love for board
         games with friends and see whose collection is more impressive!
       </p>
@@ -45,7 +50,9 @@ const Home = () => {
           type="text"
           placeholder="Search for a game... "
         />
-        <button type="submit">Search</button>
+        <button className="search-button" type="submit">
+          Search
+        </button>
       </form>
 
       {/* <div id="carousel">
