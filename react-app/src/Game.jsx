@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AddToCollection } from "./AddToCollection";
 
-function Game({ game, owned = true }) {
+function Game({ game, game_id, owned = true }) {
+  const [home, setHome] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setHome(true);
+    }
+  }, []);
+
   return (
     <div>
-      <a href={`/Detail/${game.id}`}>
+      <a href={`/Detail/${game_id}`}>
         <img className="gameimage" src={game.image_url} alt="" />
       </a>
       <br />

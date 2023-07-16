@@ -28,7 +28,7 @@ function GameDetail() {
           `https://api.boardgameatlas.com/api/game/prices?game_id=${gameId}&client_id=4Hi148hUNY`
         );
         const jsonData = await response.json();
-        // console.log({ jsonData });
+        console.log(jsonData);
 
         setPriceList(jsonData.gameWithPrices.us);
       } catch (error) {

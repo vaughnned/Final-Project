@@ -8,7 +8,7 @@ import { deleteGame } from "./CollectionCrud";
 function CollectionPage() {
   const [games, setGames] = useState([]);
   const [gameData, setGameData] = useState([]);
-  console.log(games, "here");
+  console.log(gameData, "here");
 
   useEffect(() => {
     const getUserGames = async () => {
@@ -43,9 +43,9 @@ function CollectionPage() {
 
         <div id="collection-grid" className="game-grid">
           {gameData.map((game) => (
-            <div key={game.id}>
+            <div key={game.game_atlas_id}>
               <h1>{game.title}</h1>
-              <Game game={game} />
+              <Game game={game} game_id={game.game_atlas_id} />
               <button onClick={() => deleteGame(game.id)}>Delete</button>
             </div>
           ))}
