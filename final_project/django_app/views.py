@@ -7,7 +7,7 @@ from .models import GameModel
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import GameSerializer
 from rest_framework import generics
-from authentication.models import CustomUser
+
 from django.views.decorators.csrf import ensure_csrf_cookie
 
 
@@ -39,7 +39,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 #     else:
 #         return HttpResponseNotAllowed(['POST'])
 
-print(CustomUser.username, "CUSTOM USER")
+
 
 class GetGameView(generics.ListCreateAPIView):
     serializer_class = GameSerializer
@@ -58,7 +58,7 @@ class GetGameView(generics.ListCreateAPIView):
         
     
     
-@csrf_exempt
+# @csrf_exempt
 # @ensure_csrf_cookie
 def delete_game(request, game_id):
     game_record = get_object_or_404(GameModel, id=game_id)

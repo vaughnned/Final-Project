@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import useLocalStorage from "./UseLocalStorage";
+import jwt_decode from "jwt-decode";
 
 const LoginComponent = () => {
   const [isValid, setIsValid] = useState(false);
@@ -22,7 +23,6 @@ const LoginComponent = () => {
   const handleLogIn = async (e) => {
     e.preventDefault();
 
-    console.log("something");
     const options = {
       method: "POST",
       headers: {
@@ -46,6 +46,10 @@ const LoginComponent = () => {
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
+      console.log(data, "DATA");
+      // const token = data.token;
+      // const decodedToken = jwt_decode(token);
+      // console.log(decodedToken);
       setUser({
         firstName: username,
         email: "username@example.com",

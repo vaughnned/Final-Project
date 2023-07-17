@@ -3,11 +3,15 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import useLocalStorage from "./UseLocalStorage";
+import jwt_decode from "jwt-decode";
 
 const RegisterComponent = () => {
   const [isValid, setIsValid] = useState(false);
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+
   const [error, setError] = useState("");
   const [user, setUser, removeUser] = useLocalStorage("user");
   const navigate = useNavigate();
@@ -15,8 +19,14 @@ const RegisterComponent = () => {
   const handleUsernameInput = (e) => {
     setUsername(e.target.value);
   };
-  const handlePasswordInput = (e) => {
-    setPassword(e.target.value);
+  const handleEmailInput = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePassword1Input = (e) => {
+    setPassword1(e.target.value);
+  };
+  const handlePassword2Input = (e) => {
+    setPassword2(e.target.value);
   };
 
   const handleRegister = async (e) => {
@@ -30,10 +40,10 @@ const RegisterComponent = () => {
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
-        password1: password,
-        password2: password,
+        username,
+        email,
+        password1,
+        password2,
       }),
     };
 
@@ -49,12 +59,23 @@ const RegisterComponent = () => {
       console.log({ response });
     } else {
       console.log({ data });
+
       setUser({
         firstName: "Vaughn",
         email: "vaughn@nedderman.com",
         token: data.key,
       });
       Cookies.set("Authorization", `Token ${data.key}`);
+      // const userResponse = await fetch(
+      //   "http://localhost:8000/dj-rest-auth/user",
+      //   {
+      //     header: {
+      //       Authorization: `Token ${data.key}`,
+      //     },
+      //   }
+      // );
+      // const { username } = userResponse.data;
+      // console.log(username, "username");
       setIsValid(true);
       // navigate("/");
     }
@@ -74,10 +95,22 @@ const RegisterComponent = () => {
             onChange={(e) => handleUsernameInput(e)}
           />
           <input
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => handleEmailInput(e)}
+          />
+          <input
             type="password"
             placeholder="password"
-            value={password}
-            onChange={(e) => handlePasswordInput(e)}
+            value={password1}
+            onChange={(e) => handlePassword1Input(e)}
+          />
+          <input
+            type="password"
+            placeholder="confirm password"
+            value={password2}
+            onChange={(e) => handlePassword2Input(e)}
           />
           <div id="sign-in">
             <input id="submit-button" type="submit" />|

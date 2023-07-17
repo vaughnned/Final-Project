@@ -21,6 +21,7 @@ from django_app.views import GetGameView, delete_game
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path("api-auth/", include("rest_framework.urls")),
@@ -28,8 +29,7 @@ urlpatterns = [
     # path("add-game/", add_game, name="add_game"),
     path("collection/", GetGameView.as_view(), name="GetGameView"),
     path("collection/<int:game_id>/", delete_game, name="delete_game"),
-    path('admin/', admin.site.urls),
-    path('auth/', include("authentication.urls"))
+    # path('auth/', include("authentication.urls"))
 
 
     # path('api/auth/', include('authentication.urls')),  

@@ -46,9 +46,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'authentication.apps.AuthenticationConfig',
-    'django_app',
-    'api',
+    # 'authentication.apps.AuthenticationConfig',
+    'django_app.apps.DjangoAppConfig',
+    'api.apps.ApiConfig',
+    'accounts.apps.AccountsConfig',
     
 ]
 
@@ -147,20 +148,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "http://localhost:5173/"
 
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ]
+        "rest_framework.authentication.SessionAuthentication",
+    ],
 }
 
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'authentication.serializers.CustomRegisterSerializer'
-}
+# REST_AUTH_REGISTER_SERIALIZERS = {
+#     'REGISTER_SERIALIZER': 'authentication.serializers.CustomRegisterSerializer'
+# }
 
-AUTH_USER_MODEL = 'authentication.CustomUser'
+AUTH_USER_MODEL = 'accounts.User'
 
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'AuthCookie'
 REST_AUTH = {
     'SESSION_LOGIN': False
 }
+REST_AUTH_SERIALIZERS = {
+    "TOKEN_SERIALIZER": "accounts.serializers.TokenSerializer",
+}
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

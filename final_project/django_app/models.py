@@ -11,7 +11,7 @@ from django.conf import settings
 # house rules
 class GameModel(models.Model):
     user =  models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True
+        settings.AUTH_USER_MODEL, related_name="game", on_delete=models.CASCADE, blank=True
     )
     house_rules = models.TextField(max_length=500, default="")
     title = models.TextField(max_length=100)
