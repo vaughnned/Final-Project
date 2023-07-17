@@ -1,13 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
-# class CustomUser(AbstractUser):
-#     username = models.TextField()
-#     password = models.TextField()
-#     avatar = models.ImageField(upload_to='images/')
-#     id = models.IntegerField(primary_key=True)
+
+
 
 # add a user ID for filtering
 # game ID

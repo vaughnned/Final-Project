@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication.apps.AuthenticationConfig',
     'django_app',
+    'api',
+    
 ]
 
 MIDDLEWARE = [
@@ -149,4 +151,16 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ]
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'authentication.serializers.CustomRegisterSerializer'
+}
+
+AUTH_USER_MODEL = 'authentication.CustomUser'
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'AuthCookie'
+REST_AUTH = {
+    'SESSION_LOGIN': False
 }

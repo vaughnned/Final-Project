@@ -3,7 +3,7 @@ import "../styles/App.css";
 import Header from "../Header";
 import Game from "../Game";
 import Cookies from "js-cookie";
-import { deleteGame } from "./CollectionCrud";
+import { deleteGame } from "./RenderCollection";
 
 function CollectionPage() {
   const [games, setGames] = useState([]);
@@ -19,19 +19,20 @@ function CollectionPage() {
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
       });
-      console.log("RESPONSE");
+
       const data = await response.json();
       console.log(data, "Get Game");
       setGameData(data);
     };
     getUserGames();
     // load game ids from the game model
-    console.log({ gameData }, "GAMEDATA");
+    // console.log(gameData, "GAMEDATA");
     // getGames({ ids: gameData }).then((g) => {
     //   setGames(g);
     // });
   }, []);
   // make a useEffect and redirect if user isnt logged in
+
   return (
     <>
       <Header />
@@ -44,7 +45,7 @@ function CollectionPage() {
         <div id="collection-grid" className="game-grid">
           {gameData.map((game) => (
             <div key={game.game_atlas_id}>
-              <h1>{game.title}</h1>
+              <h1>{game.title.replace(/-/g, " ").toUpperCase()}</h1>
               <Game game={game} game_id={game.game_atlas_id} />
               <button onClick={() => deleteGame(game.id)}>Delete</button>
             </div>

@@ -4,15 +4,15 @@ import Cookies from "js-cookie";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home.jsx";
 import CollectionPage from "./GameCollection/MyCollection.jsx";
-import HandleLogin from "./Login/Login";
+import Login from "./Login/Login";
 import GameDetail from "./GameDetail";
 import ProfileComponent from "./Profile";
 import Protected from "./Login/Protected";
 import FriendsList from "./Friends";
+import Register from "./Login/Register";
 
 function App() {
   const cookie = Cookies.get("Authorization");
-  console.log(cookie);
 
   return (
     <BrowserRouter basename="/">
@@ -27,7 +27,9 @@ function App() {
             </Protected>
           }
         />
-        <Route path="/Login" element={<HandleLogin />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+
         <Route path="/Detail/:gameId" element={<GameDetail />} />
         <Route
           path="/Profile"
