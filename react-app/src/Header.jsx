@@ -9,6 +9,8 @@ export default function Header() {
   const [opened, { toggle }] = useDisclosure(false);
   const label = opened ? "Close navigation" : "Open navigation";
 
+  // console.log(user?.token);
+
   // function DropDown() {
   //   const [opened, { toggle }] = useDisclosure(false);
   //   const label = opened ? "Close navigation" : "Open navigation";

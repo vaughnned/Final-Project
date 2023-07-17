@@ -14,7 +14,7 @@ import json
 
 def new_user(request):
     if request.method == "POST":
-        user = User.objects.create_user(username=request.username, password=request.password)
+        user = User.objects.create_user(username=request.username, password=request.password, token=request.key)
         print(user)
         CustomUser.save()
 
@@ -25,9 +25,12 @@ class CustomRegisterView(RegisterView):
         data = serializer.data
         data["username"] = self.request.data["username"]
         data["password"] = self.request.data["password"]
+        data["key"] = self.request.data["key"]
+
 
         user = get_user_model()
-        user.save(data)
+        user.save()
+        print(user)
 
         # return user
         return HttpResponse(json.dumps({'status': 'success', 'user': user}, content_type='application/json'))

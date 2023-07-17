@@ -1,3 +1,7 @@
+#profile-page {
+  height: 100vh;
+}
+
 #profile-reviews {
   width: 80%;
   margin: 0 auto;
@@ -6,7 +10,12 @@
 }
 
 #profile-reviews div {
+  color: black;
   height: 200px;
   width: 45%;
-  border: solid 2px white;
+  border: solid 2px black;
+}
+
+h1 {
+  color: black;
 }

@@ -27,11 +27,6 @@ const ProfileComponent = () => {
     }));
   };
 
-  console.log(state);
-
-  console.log(title);
-  console.log(selectedFile);
-
   // if (!selectedFile) {
   //   setUploadMessage("Select an image to display. ");
   //   return;
@@ -78,7 +73,7 @@ const ProfileComponent = () => {
   };
 
   return (
-    <>
+    <div id="profile-page">
       <Header />
       <h1>Joe's Profile</h1>
       <section id="profile-reviews">
@@ -99,7 +94,7 @@ const ProfileComponent = () => {
       </form>
 
       {/* <img className="collection-image" src={selectedFile} /> */}
-    </>
+    </div>
   );
 };
 

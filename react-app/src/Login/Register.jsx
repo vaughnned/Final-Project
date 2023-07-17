@@ -56,17 +56,17 @@ const RegisterComponent = () => {
       });
       Cookies.set("Authorization", `Token ${data.key}`);
       setIsValid(true);
-      navigate("/");
+      // navigate("/");
     }
 
     // if Register is valid
   };
   return (
-    <div id="Register-page">
+    <div id="login-page">
       <Header />
-      <section id="Register-form">
+      <section id="login-form">
         <h1>Register</h1>
-        <form className="Register-inputs" onSubmit={handleRegister}>
+        <form className="login-inputs" onSubmit={handleRegister}>
           <input
             type="text"
             placeholder="username"
@@ -79,7 +79,12 @@ const RegisterComponent = () => {
             value={password}
             onChange={(e) => handlePasswordInput(e)}
           />
-          <input id="submit-button" type="submit" />
+          <div id="sign-in">
+            <input id="submit-button" type="submit" />|
+            <a className="sign-up" href="/login">
+              Login
+            </a>
+          </div>
         </form>
       </section>
     </div>

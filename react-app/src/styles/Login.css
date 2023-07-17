@@ -28,3 +28,15 @@
 #submit-button {
   width: 20%;
 }
+
+#sign-in {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  color: white;
+  align-items: center;
+}
+
+.sign-up {
+  color: white;
+}

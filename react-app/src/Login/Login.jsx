@@ -47,8 +47,8 @@ const LoginComponent = () => {
       alert("Incorrect username or password");
     } else {
       setUser({
-        firstName: "Vaughn",
-        email: "vaughn@nedderman.com",
+        firstName: username,
+        email: "username@example.com",
         token: data.key,
       });
       Cookies.set("Authorization", `Token ${data.key}`);
@@ -76,7 +76,12 @@ const LoginComponent = () => {
             value={password}
             onChange={(e) => handlePasswordInput(e)}
           />
-          <input id="submit-button" type="submit" />
+          <div id="sign-in">
+            <input id="submit-button" type="submit" />|
+            <a className="sign-up" href="/register">
+              Sign Up
+            </a>
+          </div>
         </form>
       </section>
     </div>

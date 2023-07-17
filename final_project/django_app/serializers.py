@@ -6,8 +6,8 @@ class GameSerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=100)
     image_url = serializers.CharField(max_length=500)
     game_atlas_id = serializers.CharField(max_length=50, default="")
-    user_id = serializers.IntegerField(default=0)
-    # model_id = serializers.IntegerField(default=0)
+
+
 
     class Meta:
         model = GameModel

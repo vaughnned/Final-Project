@@ -4,13 +4,17 @@ import Header from "../Header";
 import Game from "../Game";
 import Cookies from "js-cookie";
 import { deleteGame } from "./RenderCollection";
+import useLocalStorage from "../Login/UseLocalStorage";
 
 function CollectionPage() {
   const [games, setGames] = useState([]);
   const [gameData, setGameData] = useState([]);
-  console.log(gameData, "here");
+  const [gameToken, setGameToken] = useState("");
+  let [user, setUser, removeUser] = useLocalStorage("user");
 
   useEffect(() => {
+    setGameToken(user?.token);
+
     const getUserGames = async () => {
       let response = await fetch(`http://127.0.0.1:8000/collection/`, {
         method: "GET",

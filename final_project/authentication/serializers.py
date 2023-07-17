@@ -7,6 +7,8 @@ class UserSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
     password = serializers.CharField()
     avatar = serializers.ImageField()
+    token = serializers.CharField(default="")
+
 
     class Meta:
         model = CustomUser
@@ -16,6 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
 class CustomRegisterSerializer(RegisterSerializer):
     username = serializers.CharField()
     password = serializers.CharField()
+    token = serializers.CharField()
+
 
     def get_cleaned_data(self):
         super(CustomRegisterSerializer, self).get_cleaned_data()
