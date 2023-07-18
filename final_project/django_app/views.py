@@ -55,8 +55,8 @@ class GetGameView(generics.ListCreateAPIView):
         
     
     
-# @csrf_exempt
 # @ensure_csrf_cookie
+@csrf_exempt
 def delete_game(request, game_id):
     game_record = get_object_or_404(GameModel, id=game_id)
 

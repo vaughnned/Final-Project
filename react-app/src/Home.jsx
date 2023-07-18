@@ -52,9 +52,7 @@ const Home = () => {
           className="search-bar"
           ref={searchRef}
           type="text"
-          placeholder=" Search for a game... "
-          onfocus="this.placeholder = ''"
-          onBlur="this.placeholder=' Search for a game... '"
+          placeholder="Search for a game... "
         />
         <button className="search-button" type="submit">
           Search

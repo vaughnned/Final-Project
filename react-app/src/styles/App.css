@@ -34,6 +34,7 @@ body {
 }
 
 .search-bar {
+  padding: 7px;
   color: black;
   width: 40%;
   border: solid #6c7476;

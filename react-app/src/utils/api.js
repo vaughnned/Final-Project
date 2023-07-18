@@ -9,7 +9,7 @@ export const getGames = async ({ query = "", ids = [] } = {}) => {
       )}&fuzzy_match=true&limit=9&client_id=4Hi148hUNY`
     );
     const jsonData = await response.json();
-    console.log(response, "RESPONSE");
+    console.log(jsonData, "RESPONSE");
 
     return jsonData.games;
   } catch (error) {
