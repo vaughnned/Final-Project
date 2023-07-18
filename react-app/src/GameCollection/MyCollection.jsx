@@ -3,19 +3,18 @@ import "../styles/App.css";
 import Header from "../Header";
 import Game from "../Game";
 import Cookies from "js-cookie";
-import { deleteGame } from "./RenderCollection";
-import useLocalStorage from "../Login/UseLocalStorage";
 
 function CollectionPage() {
   const [games, setGames] = useState([]);
   const [gameData, setGameData] = useState([]);
-  // const [gameToken, setGameToken] = useState("");
-  // let [user, setUser, removeUser] = useLocalStorage("user");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [houseRuleForm, setHouseRuleForm] = useState(false);
+  const [houseRules, setHouseRules] = useState(false);
 
   useEffect(() => {
     // setGameToken(user?.token);
     // console.log(user?.token);
+    console.log(user, "USER");
 
     const getUserGames = async () => {
       const options = {
@@ -42,6 +41,33 @@ function CollectionPage() {
     // });
   }, []);
   // make a useEffect and redirect if user isnt logged in
+  const deleteGame = async (gameId) => {
+    await fetch(`http://127.0.0.1:8000/collection/${gameId}/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${user?.token}`,
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          window.location.reload();
+          return response;
+        }
+      })
+      .catch((error) => {
+        console.error("THIS ISNT WORKING", error);
+      });
+  };
+
+  const houseRuleForms = () => {
+    setHouseRuleForm(true);
+  };
+
+  const handleHouseRules = (e) => {
+    setHouseRules(e.target.value);
+  };
 
   return (
     <>
@@ -49,15 +75,38 @@ function CollectionPage() {
 
       <h1>MY COLLECTION</h1>
       <button id="sort-button">Sort By</button>
+      {houseRuleForm ? (
+        <div>
+          <form onSubmit={setHouseRuleForm("")}>
+            <input
+              type="text"
+              placeholder="Got any House rules???"
+              onChange={() => handleHouseRules(e)}
+            />
+          </form>
+        </div>
+      ) : (
+        ""
+      )}
       <section className="collection-list">
         {/* map through database to display the user's game collection  */}
 
-        <div id="collection-grid" className="game-grid">
+        <div className="game-grid home-grid">
           {gameData.map((game) => (
             <div key={game.game_atlas_id}>
-              <h1>{game.title.replace(/-/g, " ").toUpperCase()}</h1>
+              {/* <section className="collection-title"> */}
+              <h1 className="collection-title">
+                {game.title.replace(/-/g, " ").toUpperCase()}
+              </h1>
+              {/* </section> */}
               <Game game={game} game_id={game.game_atlas_id} />
-              <button onClick={() => deleteGame(game.id)}>Delete</button>
+              <button className="button" onClick={() => houseRuleForms()}>
+                Add House Rules
+              </button>
+              |
+              <button className="button" onClick={() => deleteGame(game.id)}>
+                Remove from collection
+              </button>
             </div>
           ))}
         </div>

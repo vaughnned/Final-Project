@@ -45,7 +45,7 @@ class GetGameView(generics.ListCreateAPIView):
     serializer_class = GameSerializer
 
     def get_queryset(self):
-        print(self.request.user.id, "CUSTOM")
+        # print(self.request.user.id, "CUSTOM")
         # print(GameModel.objects.filter(), "OBJECT")
         return (GameModel.objects.filter(user=self.request.user.id))
     def perform_create(self, serializer):

@@ -1,17 +1,26 @@
-/* Use replace for dashes in titles, toUpperCase, 
-remove second card on collection page, and spacing 
-between search bar and buttons */
+@import url("https://fonts.googleapis.com/css2?family=Foldit&family=Roboto:ital@1&display=swap");
+
+html {
+  background-color: #f0f0f0;
+}
 
 body {
-  background-color: #b6b2b2;
-  /* padding-bottom: 10px; */
+  background-color: #f0f0f0;
 }
 
 #title {
+  font-family: cursive;
+  /* font-family: "Roboto", sans-serif; */
+  font-size: 70px;
   color: rgb(72, 85, 91);
 }
 
 #page-desc {
+  font-family: cursive;
+  font-family: "Roboto", sans-serif;
+
+  margin: 0 auto;
+  width: 80%;
   color: rgb(72, 85, 91);
 }
 
@@ -30,7 +39,10 @@ body {
   border: solid #6c7476;
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
-  background-color: #e9dad4;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  background-color: #f9f9f9;
 }
 
 .search-button {
@@ -47,27 +59,44 @@ body {
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 10px auto;
+  margin-bottom: 0px;
   gap: 50px;
-}
-
-#home-grid {
-  padding-bottom: 50px;
-}
-
-#home-grid div {
-  background-color: white;
+  font-size: 1vw;
 }
 
 .game-grid div {
+  max-width: 400px;
+  max-height: 450px;
   padding: 60px 40px;
   box-shadow: 10px 5px 25px rgba(25, 24, 24, 0.412);
   border-radius: 10px;
 }
 
+.game-grid div div {
+  box-shadow: 10px 5px 25px rgba(25, 24, 24, 0.412);
+
+  /* max-height: 275px;
+  overflow-y: scroll; */
+}
+
+.home-grid {
+  min-width: 100%;
+  padding-bottom: 50px;
+}
+
+.home-grid div {
+  background-color: white;
+}
+
+.home-grid div:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
 .detail-title {
+  min-width: 350px;
   width: 30%;
   height: 100px;
-  margin: 0 auto;
+  margin: 30px auto;
   background-color: #73868f;
   text-align: center;
   border: solid 5px rgb(56, 64, 64);
@@ -78,7 +107,7 @@ body {
   display: flex;
   justify-content: center;
   line-height: 2;
-  color: #211818;
+  color: #1a2124;
 }
 
 .game-desc {
@@ -97,7 +126,8 @@ body {
   width: 90%;
 }
 
-.game-prices div {
+.price-box {
+  background-color: #f9f9f9;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -105,7 +135,9 @@ body {
   height: 300px;
   padding: 10px;
   border: solid 5px rgb(167, 108, 108);
+  border-radius: 10px;
   overflow: scroll;
+  min-width: 250px;
 }
 
 .game-prices div a {
@@ -137,15 +169,23 @@ body {
   width: 300px;
 }
 
+#detail-image {
+  margin-top: 50px;
+}
+
 /* .gameimage:hover {
 } */
 
-.add-button {
+.button {
+  background-color: #44555e;
+  margin: 5px;
+  min-width: 150px;
+  font-size: 15px;
   margin-top: 20px;
 }
 
 #detail-page {
-  background-color: #b6b2b2;
+  background-color: #f0f0f0;
   height: 100%;
   width: 100%;
   padding-bottom: 50px;
@@ -176,7 +216,7 @@ body {
   justify-content: space-around;
   align-content: center;
   flex-wrap: wrap;
-  margin: 100px;
+  margin: 100px 100px 0px 100px;
 }
 
 .collection-game {
@@ -188,6 +228,7 @@ body {
 }
 
 .collection-title {
+  font-size: 35px;
   padding: 10px;
   margin: 0px;
   border-bottom: solid 1px white;

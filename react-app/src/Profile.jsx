@@ -52,25 +52,25 @@ const ProfileComponent = () => {
     }
   };
 
-  const createGame = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", state.image);
-    formData.append("title", state.title);
-    console.log(formData);
-    await fetch("http://127.0.0.1:8000/add-game/", {
-      method: "POST",
-      headers: {
-        "X-CSRFToken": Cookies.get("csrftoken"),
-      },
-      body: formData,
-    }).then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        window.location.reload();
-        return response;
-      }
-    });
-  };
+  // const createGame = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("image", state.image);
+  //   formData.append("title", state.title);
+  //   console.log(formData);
+  //   await fetch("http://127.0.0.1:8000/add-game/", {
+  //     method: "POST",
+  //     headers: {
+  //       "X-CSRFToken": Cookies.get("csrftoken"),
+  //     },
+  //     body: formData,
+  //   }).then((response) => {
+  //     if (response.status >= 200 && response.status < 300) {
+  //       window.location.reload();
+  //       return response;
+  //     }
+  //   });
+  // };
 
   return (
     <div id="profile-page">
@@ -80,18 +80,18 @@ const ProfileComponent = () => {
         <div>Review 1</div>
         <div>Review 2</div>
       </section>
-      <form onSubmit={createGame}>
-        {/* <input
-          type="text"
-          placeholder="Title... "
-          name="title"
-          onChange={(e) => handleTitleInput(e)}
-        /> */}
-        <input type="file" accept="image/*" onChange={handleFileChange} />
-        <button onClick={handleImageSubmit}>Upload Image</button>
-        {/* <button type="submit">Submit</button> */}
-        <p>{uploadMessage}</p>
-      </form>
+      {/* <form onSubmit={createGame}>
+          <input
+            type="text"
+            placeholder="Title... "
+            name="title"
+            onChange={(e) => handleTitleInput(e)}
+          />
+          <input type="file" accept="image/*" onChange={handleFileChange} />
+          <button onClick={handleImageSubmit}>Upload Image</button>
+          <button type="submit">Submit</button>
+          <p>{uploadMessage}</p>
+        </form> */}
 
       {/* <img className="collection-image" src={selectedFile} /> */}
     </div>

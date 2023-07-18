@@ -4,11 +4,11 @@ import "./styles/Header.css";
 import "./styles/Profile.css";
 import "./styles/Collection.css";
 import "./styles/Login.css";
-
 // import { Carousel } from "@mantine/carousel";
 import Header from "./Header";
 import Game from "./Game";
 import { getGames } from "./utils/api";
+import { Loader } from "@mantine/core";
 
 const Home = () => {
   let [games, setGames] = useState([]);
@@ -36,10 +36,14 @@ const Home = () => {
   return (
     <>
       <Header />
-      <h1 id="title">Board Game App</h1>
+      <h1 id="title">Game Knight</h1>
       <p id="page-desc">
-        Welcome to "insert name here"! Here you can share your love for board
-        games with friends and see whose collection is more impressive!
+        "Welcome to Game Knight! Here you can share your love for board games
+        with friends and compare to see whose collection is more impressive, and
+        much more! With Game Knight you can see what games your friends own and
+        their reviews of other games, add to your own collection so you don't
+        forget what games you own, and keep track of whose the king of game
+        knight among your friends by logging what games you've played "
       </p>
 
       {/* Search Feature */}
@@ -48,7 +52,9 @@ const Home = () => {
           className="search-bar"
           ref={searchRef}
           type="text"
-          placeholder="Search for a game... "
+          placeholder=" Search for a game... "
+          onfocus="this.placeholder = ''"
+          onBlur="this.placeholder=' Search for a game... '"
         />
         <button className="search-button" type="submit">
           Search
@@ -89,10 +95,14 @@ const Home = () => {
       </div> */}
 
       {/* Make this a component for re-use */}
-      <div id="home-grid" className="game-grid">
-        {games.map((game) => (
-          <Game game={game} game_id={game.id} key={game.id} owned={false} />
-        ))}
+      <div className="game-grid home-grid">
+        {games.length <= 0 ? (
+          <Loader />
+        ) : (
+          games.map((game) => (
+            <Game game={game} game_id={game.id} key={game.id} owned={false} />
+          ))
+        )}
       </div>
     </>
   );

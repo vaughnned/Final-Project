@@ -14,22 +14,3 @@ export const getUserGames = async () => {
 
   return data;
 };
-
-export const deleteGame = (gameId) => {
-  fetch(`http://127.0.0.1:8000/collection/${gameId}/`, {
-    method: "DELETE",
-    headers: {
-      "content-type": "application/json",
-      "X-CSRFToken": Cookies.get("csrftoken"),
-    },
-  })
-    .then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        window.location.reload();
-        return response;
-      }
-    })
-    .catch((error) => {
-      console.error("THIS ISNT WORKING", error);
-    });
-};

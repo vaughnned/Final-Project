@@ -1,9 +1,9 @@
-#collection-grid div div {
+/* #collection-grid div div {
   background-color: white;
   box-shadow: none;
-}
+} */
 
-#collection-grid div {
+/* #collection-grid div {
   background-color: #f5c08e;
 }
 
@@ -12,4 +12,34 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+} */
+
+/* .collection-title {
+  border: solid 5px rgba(25, 24, 24, 0.412);
+  border-bottom: none;
+  text-align: center;
+  height: 50px;
+  padding: 30px;
+}
+.collection-title h1 {
+  margin: 0px;
+} */
+
+.collection-title {
+  height: 75px;
+  max-height: 90px;
+  overflow: scroll;
+  margin: 0 auto;
+  background-color: #73868f;
+  text-align: center;
+  border: solid 5px rgb(56, 64, 64);
+}
+
+.collection-title h1 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0px;
+  line-height: 2;
+  color: #211818;
 }

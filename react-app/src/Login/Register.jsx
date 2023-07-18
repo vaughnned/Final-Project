@@ -11,6 +11,10 @@ const RegisterComponent = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+  const [state, setState] = useState({
+    title: "",
+    image: null,
+  });
 
   const [error, setError] = useState("");
   const [user, setUser, removeUser] = useLocalStorage("user");
@@ -28,11 +32,21 @@ const RegisterComponent = () => {
   const handlePassword2Input = (e) => {
     setPassword2(e.target.value);
   };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setState((prevState) => ({
+      ...prevState,
+      image: file,
+    }));
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     console.log("something");
+    const formData = new FormData();
+    formData.append("image", state.image);
+    // formData.append("title", state.title);
     const options = {
       method: "POST",
       headers: {
@@ -44,6 +58,7 @@ const RegisterComponent = () => {
         email,
         password1,
         password2,
+        formData,
       }),
     };
 
@@ -58,13 +73,14 @@ const RegisterComponent = () => {
     if (!response.ok) {
       console.log({ response });
     } else {
-      console.log({ data });
-
+      console.log(data, "data");
       setUser({
         firstName: "Vaughn",
         email: "vaughn@nedderman.com",
         token: data.key,
+        image: data,
       });
+      console.log(user);
       Cookies.set("Authorization", `Token ${data.key}`);
       // const userResponse = await fetch(
       //   "http://localhost:8000/dj-rest-auth/user",
@@ -88,29 +104,40 @@ const RegisterComponent = () => {
       <section id="login-form">
         <h1>Register</h1>
         <form className="login-inputs" onSubmit={handleRegister}>
+          Username:
           <input
             type="text"
             placeholder="username"
             value={username}
             onChange={(e) => handleUsernameInput(e)}
           />
+          Email:
           <input
             type="email"
             placeholder="email"
             value={email}
             onChange={(e) => handleEmailInput(e)}
           />
+          Password:
           <input
             type="password"
             placeholder="password"
             value={password1}
             onChange={(e) => handlePassword1Input(e)}
           />
+          Confirm Password:
           <input
             type="password"
             placeholder="confirm password"
             value={password2}
             onChange={(e) => handlePassword2Input(e)}
+          />
+          Profile Pic:
+          <input
+            className="profile-pic"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
           />
           <div id="sign-in">
             <input id="submit-button" type="submit" />|

@@ -3,6 +3,7 @@ import "./styles/App.css";
 import Header from "./Header";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Loader } from "@mantine/core";
 
 function GameDetail() {
   const [game, setGame] = useState();
@@ -45,7 +46,7 @@ function GameDetail() {
   console.log(storeName);
 
   if (!game) {
-    return <h2>Loading...</h2>;
+    return <Loader />;
   }
   return (
     <div id="detail-page">
@@ -53,27 +54,33 @@ function GameDetail() {
       <div className="detail-title">
         <h1>{game?.handle.toUpperCase()}</h1>
       </div>
-      <img className="gameimage game-grid" src={game.image_url} alt="" />
+      <img src="" alt="" />
+      <img
+        id="detail-image"
+        className="gameimage game-grid"
+        src={game.image_url}
+        alt=""
+      />
       <div className="game-desc">
         <p>{game.description_preview}</p>
       </div>
       <h1 id="price-title">Check out some purchase options for {game.name}!</h1>
       <section className="game-prices">
-        <div className="amazon">
+        <div className="price-box">
           <h2>
             <a href={storeName[0]?.url}>{storeName[0]?.store_name}</a>
           </h2>
           <h3 className="price-name">{storeName[0]?.name}</h3>
           <p className="price-number">{storeName[0]?.price_text}</p>
         </div>
-        <div>
+        <div className="price-box">
           <h2>
             <a href={storeName[1]?.url}>{storeName[1]?.store_name}</a>
           </h2>
           <h3 className="price-name">{storeName[1]?.name}</h3>
           <p className="price-number">{storeName[1]?.price_text}</p>
         </div>
-        <div>
+        <div className="price-box">
           <h2>
             <a href={storeName[2]?.url}>{storeName[2]?.store_name}</a>
           </h2>
