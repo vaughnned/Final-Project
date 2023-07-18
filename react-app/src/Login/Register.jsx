@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header";
-import useLocalStorage from "./UseLocalStorage";
-import jwt_decode from "jwt-decode";
+
+import useLocalStorage from "../utils/useLocalStorage";
 
 const RegisterComponent = () => {
   const [isValid, setIsValid] = useState(false);
@@ -16,7 +15,6 @@ const RegisterComponent = () => {
     image: null,
   });
 
-  const [error, setError] = useState("");
   const [user, setUser, removeUser] = useLocalStorage("user");
   const navigate = useNavigate();
 
@@ -80,27 +78,17 @@ const RegisterComponent = () => {
         token: data.key,
         image: data,
       });
+
       console.log(user);
       Cookies.set("Authorization", `Token ${data.key}`);
-      // const userResponse = await fetch(
-      //   "http://localhost:8000/dj-rest-auth/user",
-      //   {
-      //     header: {
-      //       Authorization: `Token ${data.key}`,
-      //     },
-      //   }
-      // );
-      // const { username } = userResponse.data;
-      // console.log(username, "username");
       setIsValid(true);
-      // navigate("/");
+      navigate("/");
     }
 
     // if Register is valid
   };
   return (
     <div id="login-page">
-      <Header />
       <section id="login-form">
         <h1>Register</h1>
         <form className="login-inputs" onSubmit={handleRegister}>

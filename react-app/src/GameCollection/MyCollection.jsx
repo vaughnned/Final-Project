@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/App.css";
-import Header from "../Header";
+
 import Game from "../Game";
 import Cookies from "js-cookie";
 
@@ -71,8 +71,6 @@ function CollectionPage() {
 
   return (
     <>
-      <Header />
-
       <h1 className="title">The Armory</h1>
       <button id="sort-button">Sort By</button>
       {houseRuleForm ? (

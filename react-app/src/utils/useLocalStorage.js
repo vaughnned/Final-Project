@@ -5,10 +5,15 @@ const useLocalStorage = (key, value = null) => {
   const localStorageValue = localStorage.getItem(key);
 
   useEffect(() => {
-    if (localStorageValue) {
-      setState(JSON.parse(localStorageValue));
-    } else {
-      localStorage.setItem(key, JSON.stringify(value));
+    try {
+      if (localStorageValue) {
+        setState(JSON.parse(localStorageValue));
+      } else {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+    } catch (error) {
+      console.error(error);
+      localStorage.removeItem(key);
     }
   }, []);
 

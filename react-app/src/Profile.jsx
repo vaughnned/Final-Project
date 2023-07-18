@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import Header from "./Header";
 
 const ProfileComponent = () => {
   const [title, setTitle] = useState("");
@@ -74,7 +72,6 @@ const ProfileComponent = () => {
 
   return (
     <div id="profile-page">
-      <Header />
       <h1>Joe's Profile</h1>
       <section id="profile-reviews">
         <div>Review 1</div>

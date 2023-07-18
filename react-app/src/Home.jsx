@@ -4,8 +4,7 @@ import "./styles/Header.css";
 import "./styles/Profile.css";
 import "./styles/Collection.css";
 import "./styles/Login.css";
-// import { Carousel } from "@mantine/carousel";
-import Header from "./Header";
+
 import Game from "./Game";
 import { getGames } from "./utils/api";
 import { Loader } from "@mantine/core";
@@ -13,12 +12,6 @@ import { Loader } from "@mantine/core";
 const Home = () => {
   let [games, setGames] = useState([]);
   let searchRef = useRef("");
-
-  // useEffect(() => {
-  //   getGames({ ids: ["08asLSfoZy"] }).then((g) => {
-  //     setGames(g);
-  //   });
-  // }, []);
 
   useEffect(() => {
     getGames().then((g) => {
@@ -35,7 +28,6 @@ const Home = () => {
 
   return (
     <>
-      <Header />
       <h1 className="title">Game Knight</h1>
       <p id="page-desc">
         "Welcome to Game Knight! Here you can share your love for board games

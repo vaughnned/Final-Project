@@ -1,27 +1,17 @@
-import { useState } from "react";
-import { Burger } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import useLocalStorage from "./Login/UseLocalStorage";
+import useLocalStorage from "./utils/useLocalStorage";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   let [user, setUser, removeUser] = useLocalStorage("user");
-  const [opened, { toggle }] = useDisclosure(false);
-  const label = opened ? "Close navigation" : "Open navigation";
-
-  // function DropDown() {
-  //   const [opened, { toggle }] = useDisclosure(false);
-  //   const label = opened ? "Close navigation" : "Open navigation";
-  // }
+  const navigate = useNavigate();
 
   function logout() {
     removeUser();
     Cookies.remove("Authorization");
+    navigate("#");
   }
 
-  // function login() {
-  //   setUser({ firstName: "Vaughn", email: "vaughn@nedderman.com" });
-  // }
   return (
     <>
       <header id="header">
@@ -45,15 +35,6 @@ export default function Header() {
               <a href="/login">Login</a>
             </div>
           )}
-          {/* <div>
-            <Burger
-              margin="0"
-              color="#FFFFFF"
-              opened={opened}
-              onClick={toggle}
-              aria-label={label}
-            />
-          </div> */}
         </nav>
       </header>
     </>

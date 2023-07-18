@@ -1,15 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header";
-import useLocalStorage from "./UseLocalStorage";
-import jwt_decode from "jwt-decode";
+import useLocalStorage from "../utils/useLocalStorage";
 
 const LoginComponent = () => {
   const [isValid, setIsValid] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [user, setUser, removeUser] = useLocalStorage("user");
   const navigate = useNavigate();
 
@@ -26,9 +23,6 @@ const LoginComponent = () => {
     console.log("Cookie", Cookies.get("csrftoken"));
     const options = {
       method: "POST",
-      // credentials: "include",
-      // xsrfCookieName: "csrftoken",
-      // xsrfHeaderName: "X-CSRFTOKEN",
       headers: {
         "content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftsoken"),
@@ -51,10 +45,6 @@ const LoginComponent = () => {
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
-      // console.log(data, "DATA");
-      // const token = data.token;
-      // const decodedToken = jwt_decode(token);
-      // console.log(decodedToken);
       setUser({
         firstName: username,
         email: "username@example.com",
@@ -63,6 +53,7 @@ const LoginComponent = () => {
       Cookies.set("Authorization", `Token ${data.key}`);
       setIsValid(true);
       navigate("/");
+      location.reload();
     }
     console.log(user, "USER");
 
@@ -70,7 +61,6 @@ const LoginComponent = () => {
   };
   return (
     <div id="login-page">
-      <Header />
       <section id="login-form">
         <h1>Login</h1>
         <form className="login-inputs" onSubmit={handleLogIn}>

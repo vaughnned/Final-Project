@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/App.css";
-import Header from "./Header";
+
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Loader } from "@mantine/core";
@@ -50,7 +50,6 @@ function GameDetail() {
   }
   return (
     <div id="detail-page">
-      <Header />
       <div className="detail-title">
         <h1>{game?.handle.toUpperCase()}</h1>
       </div>

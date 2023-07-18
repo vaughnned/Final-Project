@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "./Header";
 
 export default function FriendsList() {
   return (
     <>
-      <Header />
       <div id="friends-list">
         <h1 id="friend-title">Friends</h1>
         <div className="friend">

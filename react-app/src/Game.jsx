@@ -8,8 +8,6 @@ function Game({ game, game_id, owned = true }) {
 
   // useEffect(() => {
   setTimeout(() => setGameToken(user?.token), 1000);
-  //   // setTimeout(() => console.log(user), 100);
-  // }, [user?.token]);
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -34,10 +32,6 @@ function Game({ game, game_id, owned = true }) {
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify({
-        // game_atlas_id: { gameId },
-        // title: { gameTitle },
-        // imageUrl: { gameImageUrl },
-        // token: gameToken,
         game_atlas_id: gameId,
         title: gameTitle,
         image_url: gameImageUrl,
