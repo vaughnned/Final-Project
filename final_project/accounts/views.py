@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from dj_rest_auth.views import LoginView
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 from rest_framework import generics
@@ -26,6 +27,7 @@ class ProfileUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.ProfileSerializer
 
 
+@ensure_csrf_cookie
 class CustomLoginView(LoginView):
     def get_response_serializer(self):
         return serializers.CustomLoginSerializer

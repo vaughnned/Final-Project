@@ -3,6 +3,7 @@ from dj_rest_auth.models import TokenModel
 from . import models
 from django_app.models import GameModel
 from django.contrib.auth import get_user_model
+from dj_rest_auth.serializers import TokenSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,7 +46,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = "__all__"
+        fields = ('id', 'username', 'email')
 
 
 class CustomLoginSerializer(TokenSerializer):

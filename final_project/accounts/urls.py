@@ -1,15 +1,15 @@
 from django.urls import path
-from . import views
+from .views import CustomLoginView, UserListAPIView, ProfileListAPIView, ProfileUpdateAPIView
 
 app_name = "accounts"
 
 urlpatterns = [
-    path("user/", views.UserListAPIView.as_view(), name="all_profiles"),
-    path("user/profile/", views.ProfileListAPIView.as_view(), name="all_profiles"),
+    path("user/", UserListAPIView.as_view(), name="all_profiles"),
+    path("user/profile/", ProfileListAPIView.as_view(), name="all_profiles"),
     path(
         "user/profile/<int:pk>/",
-        views.ProfileUpdateAPIView.as_view(),
+        ProfileUpdateAPIView.as_view(), 
         name="profile_list",
     ),
-    path('login/', views.CustomLoginView.as_view(), name='account_login')
+    path('login/', CustomLoginView, name='account_login')
 ]

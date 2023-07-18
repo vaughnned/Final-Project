@@ -23,8 +23,12 @@ const LoginComponent = () => {
   const handleLogIn = async (e) => {
     e.preventDefault();
 
+    console.log("Cookie", Cookies.get("csrftoken"));
     const options = {
       method: "POST",
+      // credentials: "include",
+      xsrfCookieName: "csrftoken",
+      xsrfHeaderName: "X-CSRFTOKEN",
       headers: {
         "content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
@@ -36,7 +40,7 @@ const LoginComponent = () => {
     };
 
     const response = await fetch(
-      "http://localhost:8000/dj-rest-auth/login/",
+      "http://localhost:8000/accounts/login/",
       options
     ).catch((error) => {
       console.error("THIS ISNT WORKING", error);

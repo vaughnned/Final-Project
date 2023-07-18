@@ -29,11 +29,11 @@ urlpatterns = [
     # path("add-game/", add_game, name="add_game"),
     path("collection/", GetGameView.as_view(), name="GetGameView"),
     path("collection/<int:game_id>/", delete_game, name="delete_game"),
-    # path('auth/', include("authentication.urls"))
+    path('accounts/', include("allauth.urls")),
+    path('auth/', include("accounts.urls")),
 
 
     # path('api/auth/', include('authentication.urls')),  
     # path('/dj-rest-auth/login/', get_login)
-    # path('accounts/', include("django.contrib.auth.urls")),
 
 ]
