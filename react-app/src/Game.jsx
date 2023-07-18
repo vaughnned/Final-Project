@@ -5,7 +5,9 @@ import useLocalStorage from "./Login/UseLocalStorage";
 function Game({ game, game_id, owned = true }) {
   const [home, setHome] = useState(false);
   const [gameToken, setGameToken] = useState("");
-  let [user, setUser, removeUser] = useLocalStorage("user");
+  // let [user, setUser, removeUser] = useLocalStorage("user");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
   // console.log(user?.token);
 
   useEffect(() => {
@@ -37,6 +39,7 @@ function Game({ game, game_id, owned = true }) {
     await fetch(`http://127.0.0.1:8000/collection/`, {
       method: "POST",
       headers: {
+        Authorization: `Token ${user?.token}`,
         "content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
@@ -67,6 +70,7 @@ function Game({ game, game_id, owned = true }) {
       {/* add a "house rule" option if the game is already owned */}
       {!owned ? (
         <button
+          className="add-button"
           onClick={(e) =>
             addToCollection(e, {
               gameId: game.id,

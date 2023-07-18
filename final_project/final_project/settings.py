@@ -73,6 +73,8 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:5173','http://127.0.0.1:8000/']
 
 CSRF_COOKIE_DOMAIN = '.localhost'
 
+CSRF_COOKIE_SAMESITE = 'Lax'
+
 ROOT_URLCONF = 'final_project.urls'
 
 TEMPLATES = [

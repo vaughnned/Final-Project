@@ -26,11 +26,11 @@ urlpatterns = [
     path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path("api-auth/", include("rest_framework.urls")),
     path("api_v1/", include("api.urls")),
-    # path("add-game/", add_game, name="add_game"),
     path("collection/", GetGameView.as_view(), name="GetGameView"),
     path("collection/<int:game_id>/", delete_game, name="delete_game"),
     path('accounts/', include("allauth.urls")),
     path('auth/', include("accounts.urls")),
+    # path("add-game/", add_game, name="add_game"),
 
 
     # path('api/auth/', include('authentication.urls')),  

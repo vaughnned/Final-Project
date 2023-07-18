@@ -9,20 +9,26 @@ import useLocalStorage from "../Login/UseLocalStorage";
 function CollectionPage() {
   const [games, setGames] = useState([]);
   const [gameData, setGameData] = useState([]);
-  const [gameToken, setGameToken] = useState("");
-  let [user, setUser, removeUser] = useLocalStorage("user");
+  // const [gameToken, setGameToken] = useState("");
+  // let [user, setUser, removeUser] = useLocalStorage("user");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
-    setGameToken(user?.token);
+    // setGameToken(user?.token);
+    // console.log(user?.token);
 
     const getUserGames = async () => {
-      let response = await fetch(`http://127.0.0.1:8000/collection/`, {
+      const options = {
         method: "GET",
         headers: {
+          Authorization: `Token ${user?.token}`,
           "content-type": "application/json",
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
-      });
+      };
+
+      let response = await fetch(`http://127.0.0.1:8000/collection/`, options);
+      console.log(options, "HEADERS");
 
       const data = await response.json();
       console.log(data, "Get Game");

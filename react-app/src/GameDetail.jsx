@@ -48,7 +48,7 @@ function GameDetail() {
     return <h2>Loading...</h2>;
   }
   return (
-    <>
+    <div id="detail-page">
       <Header />
       <div className="detail-title">
         <h1>{game?.handle.toUpperCase()}</h1>
@@ -57,7 +57,7 @@ function GameDetail() {
       <div className="game-desc">
         <p>{game.description_preview}</p>
       </div>
-      <h1>Check out some purchase options for {game.name}!</h1>
+      <h1 id="price-title">Check out some purchase options for {game.name}!</h1>
       <section className="game-prices">
         <div className="amazon">
           <h2>
@@ -81,7 +81,7 @@ function GameDetail() {
           <p className="price-number">{storeName[2]?.price_text}</p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

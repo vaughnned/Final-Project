@@ -45,14 +45,11 @@ class GetGameView(generics.ListCreateAPIView):
     serializer_class = GameSerializer
 
     def get_queryset(self):
-        print(self.request.user, "CUSTOM")
+        print(self.request.user.id, "CUSTOM")
         # print(GameModel.objects.filter(), "OBJECT")
-        return (GameModel.objects.all())
+        return (GameModel.objects.filter(user=self.request.user.id))
     def perform_create(self, serializer):
-        if self.request.user.is_authenticated:
-            print(self.request.user, "Is Authenticated")
-        else:
-            print("Is Not Authenticated")
+        
         serializer.save(user=self.request.user)
 
         

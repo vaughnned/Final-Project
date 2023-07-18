@@ -42,11 +42,11 @@ class GameSerializer(serializers.ModelSerializer):
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
-    recipes = GameSerializer(many=True, read_only=True)
+    games = GameSerializer(many=True, read_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'games')
 
 
 class CustomLoginSerializer(TokenSerializer):

@@ -3,36 +3,38 @@ remove second card on collection page, and spacing
 between search bar and buttons */
 
 body {
-  background-color: #f5f5f7;
-  padding-bottom: 10px;
+  background-color: #b6b2b2;
+  /* padding-bottom: 10px; */
 }
 
 #title {
-  color: #3c4e57;
+  color: rgb(72, 85, 91);
 }
 
 #page-desc {
-  color: #3c4e57;
+  color: rgb(72, 85, 91);
 }
 
 .search-form {
   display: flex;
+  color: black;
   position: relative;
-  margin: 20px auto;
+  margin: 50px auto;
   width: 80%;
   justify-content: center;
 }
 
 .search-bar {
+  color: black;
   width: 40%;
   border: solid #6c7476;
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
-  background-color: #cee3ed;
+  background-color: #e9dad4;
 }
 
 .search-button {
-  background-color: #5a7684;
+  background-color: #44555e;
   color: #cad4d8;
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
@@ -46,6 +48,10 @@ body {
   flex-wrap: wrap;
   margin: 10px auto;
   gap: 50px;
+}
+
+#home-grid {
+  padding-bottom: 50px;
 }
 
 #home-grid div {
@@ -62,9 +68,9 @@ body {
   width: 30%;
   height: 100px;
   margin: 0 auto;
-  background-color: #3c4e57;
+  background-color: #73868f;
   text-align: center;
-  border: solid 5px rgb(23, 29, 29);
+  border: solid 5px rgb(56, 64, 64);
 }
 
 .detail-title h1 {
@@ -72,16 +78,20 @@ body {
   display: flex;
   justify-content: center;
   line-height: 2;
+  color: #211818;
 }
 
 .game-desc {
+  color: #3c4e57;
   font-size: 20px;
   width: 80%;
   margin: 0 auto;
 }
 
 .game-prices {
+  color: #3c4e57;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin: 50px auto;
   width: 90%;
@@ -99,9 +109,9 @@ body {
 }
 
 .game-prices div a {
-  border-bottom: solid 2px white;
+  border-bottom: solid 2px black;
   padding: 10px;
-  color: antiquewhite;
+  color: #2b4b5a;
 }
 
 .price-name {
@@ -112,6 +122,11 @@ body {
   font-size: 20px;
 }
 
+#price-title {
+  margin-top: 100px;
+  font-size: 40px;
+}
+
 .gametitle {
   font-size: 30px;
 }
@@ -120,6 +135,20 @@ body {
   height: 200px;
   max-height: 500px;
   width: 300px;
+}
+
+/* .gameimage:hover {
+} */
+
+.add-button {
+  margin-top: 20px;
+}
+
+#detail-page {
+  background-color: #b6b2b2;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 50px;
 }
 
 /* #carousel {

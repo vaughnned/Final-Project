@@ -27,20 +27,21 @@ const LoginComponent = () => {
     const options = {
       method: "POST",
       // credentials: "include",
-      xsrfCookieName: "csrftoken",
-      xsrfHeaderName: "X-CSRFTOKEN",
+      // xsrfCookieName: "csrftoken",
+      // xsrfHeaderName: "X-CSRFTOKEN",
       headers: {
         "content-type": "application/json",
-        "X-CSRFToken": Cookies.get("csrftoken"),
+        "X-CSRFToken": Cookies.get("csrftsoken"),
       },
       body: JSON.stringify({
         username: username,
         password: password,
       }),
     };
+    console.log(options.headers, "HEADERS");
 
     const response = await fetch(
-      "http://localhost:8000/accounts/login/",
+      "http://localhost:8000/auth/login/",
       options
     ).catch((error) => {
       console.error("THIS ISNT WORKING", error);
@@ -50,7 +51,7 @@ const LoginComponent = () => {
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
-      console.log(data, "DATA");
+      // console.log(data, "DATA");
       // const token = data.token;
       // const decodedToken = jwt_decode(token);
       // console.log(decodedToken);
@@ -63,6 +64,7 @@ const LoginComponent = () => {
       setIsValid(true);
       navigate("/");
     }
+    console.log(user, "USER");
 
     // if login is valid
   };

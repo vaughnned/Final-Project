@@ -11,5 +11,5 @@ urlpatterns = [
         ProfileUpdateAPIView.as_view(), 
         name="profile_list",
     ),
-    path('login/', CustomLoginView, name='account_login')
+    path('login/', CustomLoginView.as_view(), name='account_login')
 ]

@@ -27,7 +27,7 @@ class ProfileUpdateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = serializers.ProfileSerializer
 
 
-@ensure_csrf_cookie
+
 class CustomLoginView(LoginView):
     def get_response_serializer(self):
         return serializers.CustomLoginSerializer
