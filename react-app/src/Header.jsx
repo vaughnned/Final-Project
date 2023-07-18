@@ -25,26 +25,15 @@ export default function Header() {
   return (
     <>
       <header id="header">
-        {user?.token ? (
-          <>
-            <a className="pagenav" href="/">
-              Home
-            </a>
-            <a className="pagenav" href="/Collection">
-              Collection
-            </a>
-          </>
-        ) : (
-          <a className="pagenav" href="/">
-            Home
-          </a>
-        )}
-
+        <a className="pagenav" href="/">
+          Home
+        </a>
         <nav id="head">
           {user ? (
             <>
+              <a href="/Collection">Armory</a>
               <a href="/friends">Friends</a>
-              <a href="/profile">Profile</a>
+              {/* <a href="/profile">Profile</a> */}
               <div>
                 <a href="#" onClick={logout}>
                   Logout
@@ -56,7 +45,7 @@ export default function Header() {
               <a href="/login">Login</a>
             </div>
           )}
-          <div>
+          {/* <div>
             <Burger
               margin="0"
               color="#FFFFFF"
@@ -64,7 +53,7 @@ export default function Header() {
               onClick={toggle}
               aria-label={label}
             />
-          </div>
+          </div> */}
         </nav>
       </header>
     </>

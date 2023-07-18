@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <h1 id="title">Game Knight</h1>
+      <h1 className="title">Game Knight</h1>
       <p id="page-desc">
         "Welcome to Game Knight! Here you can share your love for board games
         with friends and compare to see whose collection is more impressive, and

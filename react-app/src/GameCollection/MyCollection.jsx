@@ -73,7 +73,7 @@ function CollectionPage() {
     <>
       <Header />
 
-      <h1>MY COLLECTION</h1>
+      <h1 className="title">The Armory</h1>
       <button id="sort-button">Sort By</button>
       {houseRuleForm ? (
         <div>
