@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from dj_rest_auth.views import LoginView
-from django.views.decorators.csrf import ensure_csrf_cookie
+
 
 # Create your views here.
 from rest_framework import generics
