@@ -8,6 +8,7 @@ const LoginComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser, removeUser] = useLocalStorage("user");
+  const [profilePic, setProfilePic] = useState("");
   const navigate = useNavigate();
 
   const handleUsernameInput = (e) => {

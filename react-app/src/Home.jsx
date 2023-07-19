@@ -31,7 +31,7 @@ const Home = () => {
       <h1 className="title">Game Knight</h1>
       <p id="page-desc">
         "Welcome to Game Knight! Here you can share your love for board games
-        with friends and compare to see whose collection is more impressive, and
+        with friends, by compare to see whose collection is more impressive, and
         much more! With Game Knight you can see what games your friends own and
         their reviews of other games, add to your own collection so you don't
         forget what games you own, and keep track of whose the king of game

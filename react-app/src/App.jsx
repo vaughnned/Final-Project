@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles/index.css";
 import Cookies from "js-cookie";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
@@ -11,9 +11,11 @@ import Protected from "./Login/Protected";
 import FriendsList from "./Friends";
 import Register from "./Login/Register";
 import Header from "./Header";
+import FriendCollection from "./GameCollection/FriendCollection.jsx";
 
 function App() {
   const cookie = Cookies.get("Authorization");
+  const [collectionData, setCollectionData] = useState([]);
 
   return (
     <BrowserRouter basename="/">
@@ -45,6 +47,14 @@ function App() {
             element={
               <Protected isLoggedIn={cookie}>
                 <FriendsList />
+              </Protected>
+            }
+          />
+          <Route
+            path="/collection/:id"
+            element={
+              <Protected isLoggedIn={cookie}>
+                <FriendCollection />
               </Protected>
             }
           />

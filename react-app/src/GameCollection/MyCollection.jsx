@@ -1,26 +1,35 @@
 import React, { useState, useEffect } from "react";
 import "../styles/App.css";
-
 import Game from "../Game";
 import Cookies from "js-cookie";
+import { Avatar } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, Group, Button } from "@mantine/core";
+import useLocalStorage from "../utils/useLocalStorage";
 
 function CollectionPage() {
   const [games, setGames] = useState([]);
   const [gameData, setGameData] = useState([]);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [houseRuleForm, setHouseRuleForm] = useState(false);
-  const [houseRules, setHouseRules] = useState(false);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
+  const [user, setUser, removeUser] = useLocalStorage("user");
+
+  const [houseRuleForm, setHouseRuleForm] = useState(true);
+  const [houseRules, setHouseRules] = useState("");
+  const [profilePic, setProfilePic] = useState("");
+  const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
     // setGameToken(user?.token);
     // console.log(user?.token);
-    console.log(user, "USER");
+    console.log(currentUser, "USER");
 
     const getUserGames = async () => {
       const options = {
         method: "GET",
         headers: {
-          Authorization: `Token ${user?.token}`,
+          Authorization: `Token ${currentUser?.token}`,
           "content-type": "application/json",
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
@@ -42,10 +51,10 @@ function CollectionPage() {
   }, []);
   // make a useEffect and redirect if user isnt logged in
   const deleteGame = async (gameId) => {
-    await fetch(`http://127.0.0.1:8000/collection/${gameId}/`, {
+    await fetch(`http://127.0.0.1:8000/collection/delete/${gameId}/`, {
       method: "DELETE",
       headers: {
-        Authorization: `Token ${user?.token}`,
+        Authorization: `Token ${currentUser?.token}`,
         "content-type": "application/json",
         "X-CSRFToken": Cookies.get("csrftoken"),
       },
@@ -62,30 +71,79 @@ function CollectionPage() {
   };
 
   const houseRuleForms = () => {
-    setHouseRuleForm(true);
+    setHouseRuleForm(false);
   };
 
   const handleHouseRules = (e) => {
     setHouseRules(e.target.value);
   };
+  console.log(houseRules, "house rule");
+
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   console.log(file);
+  //   setProfilePic(file.name);
+  // };
+
+  useEffect(() => {
+    console.log(user, "CHANGE");
+  }, [user]);
+
+  // const handleSubmit = () => {
+  //   // e.preventDefault();
+  //   setCurrentUser({
+  //     firstName: currentUser.firstName,
+  //     email: currentUser.email,
+  //     token: currentUser.token,
+  //     profilePic: profilePic,
+  //   });
+  // };
 
   return (
     <>
-      <h1 className="title">The Armory</h1>
-      <button id="sort-button">Sort By</button>
-      {houseRuleForm ? (
+      {/* <h1 className="title">The Armory</h1> */}
+      <div id="profile">
+        {/* <img className="profile-pic" id="armory-pic" src="" alt="" /> */}
+        <Avatar
+          src={profilePic}
+          alt="it's me"
+          radius={100}
+          size={200}
+          onClick={open}
+        />
+        {/* {!houseRuleForm ? ( */}
         <div>
-          <form onSubmit={setHouseRuleForm("")}>
-            <input
-              type="text"
-              placeholder="Got any House rules???"
-              onChange={() => handleHouseRules(e)}
-            />
-          </form>
+          <Modal opened={opened} onClose={close} title="House Rules" centered>
+            <form className="modal" onSubmit={handleHouseRules}>
+              <textarea
+                rows={10}
+                className="modal-input"
+                type="textarea"
+                placeholder="Got any House rules???"
+                onChange={() => handleHouseRules(e)}
+              />
+              <button id="modal-button" type="submit">
+                Save
+              </button>
+            </form>
+          </Modal>
         </div>
-      ) : (
-        ""
-      )}
+        {/* ) : (
+          ""
+        )} */}
+        {/* <Modal opened={opened} onClose={close} title="Authentication" centered>
+          <form onSubmit={handleSubmit}>
+            <input type="file" accept="image/*" onChange={handleFileChange} />
+            <button type="Submit">Save</button>
+          </form>
+        </Modal> */}
+        {/* 
+        <h1 id="profile-username">{user.firstName}</h1>
+        <h3 id="profile-desc">Favorite Game:</h3> */}
+      </div>
+
+      <h1 className="title">{currentUser.firstName}'s Armory</h1>
+
       <section className="collection-list">
         {/* map through database to display the user's game collection  */}
 
@@ -98,7 +156,7 @@ function CollectionPage() {
               </h1>
               {/* </section> */}
               <Game game={game} game_id={game.game_atlas_id} />
-              <button className="button" onClick={() => houseRuleForms()}>
+              <button className="button" onClick={open}>
                 Add House Rules
               </button>
               |

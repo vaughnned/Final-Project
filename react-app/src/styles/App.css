@@ -253,11 +253,35 @@ body {
   width: 400px;
 }
 
+.mantine-Modal-inner {
+  padding-left: 0px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal textarea {
+  font-size: 2 0px;
+}
+
+.modal-button {
+  width: 30%;
+  align-self: flex-end;
+}
+
 .friend-details {
+  color: #2b4b5a;
   margin: 5px;
 }
+
+.friend-details:hover {
+  text-decoration: underline;
+}
+
 #friend-title {
-  border-bottom: solid 3px white;
+  border-bottom: solid 3px gray;
   padding-bottom: 20px;
 }
 
@@ -275,6 +299,16 @@ body {
   width: 25%;
   overflow: scroll;
   padding: 5px;
+}
+
+#modal-input {
+  padding: 50px;
+  height: 50px;
+  width: 75px;
+}
+
+#armory-pic:hover {
+  border: solid 2px blue;
 }
 
 body {
