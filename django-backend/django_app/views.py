@@ -59,6 +59,17 @@ class GetFriendsGameView(generics.ListCreateAPIView):
         return (GameModel.objects.filter(user=user_id))
         
     
+class UpdateGameView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = GameSerializer
+    # queryset = GameModel.objects.filter(id=game_id)
+
+    # @csrf_exempt
+    def get_queryset(self):
+        print(self, "SELF")
+        id = self.kwargs['pk']
+        return (GameModel.objects.filter(id=id))
+    # def partial_update(self, serializer):
+    #     serializer.update(house_rules=self.request)
     
 # @ensure_csrf_cookie
 @csrf_exempt

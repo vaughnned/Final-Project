@@ -253,6 +253,11 @@ body {
   width: 400px;
 }
 
+.modal-view {
+  position: absolute;
+  display: none;
+}
+
 .mantine-Modal-inner {
   padding-left: 0px;
 }

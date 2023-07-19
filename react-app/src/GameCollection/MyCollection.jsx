@@ -74,10 +74,38 @@ function CollectionPage() {
     setHouseRuleForm(false);
   };
 
-  const handleHouseRules = (e) => {
+  const handleChange = (e) => {
     setHouseRules(e.target.value);
   };
-  console.log(houseRules, "house rule");
+
+  const handleHouseRules = async (event, game_id) => {
+    console.log(event, "EVENT");
+    event.preventDefault();
+    // console.log(e.target.value, "value");
+    const updateGame = async (gameId) => {
+      await fetch(`http://127.0.0.1:8000/collection/game/${game_id}/`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Token ${currentUser?.token}`,
+          "content-type": "application/json",
+          "X-CSRFToken": Cookies.get("csrftoken"),
+        },
+        body: {
+          house_rules: houseRules,
+        },
+      })
+        .then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            window.location.reload();
+            return response;
+          }
+        })
+        .catch((error) => {
+          console.error("THIS ISNT WORKING", error);
+        });
+    };
+    updateGame();
+  };
 
   // const handleFileChange = (e) => {
   //   const file = e.target.files[0];
@@ -111,23 +139,9 @@ function CollectionPage() {
           size={200}
           onClick={open}
         />
+
         {/* {!houseRuleForm ? ( */}
-        <div>
-          <Modal opened={opened} onClose={close} title="House Rules" centered>
-            <form className="modal" onSubmit={handleHouseRules}>
-              <textarea
-                rows={10}
-                className="modal-input"
-                type="textarea"
-                placeholder="Got any House rules???"
-                onChange={() => handleHouseRules(e)}
-              />
-              <button id="modal-button" type="submit">
-                Save
-              </button>
-            </form>
-          </Modal>
-        </div>
+
         {/* ) : (
           ""
         )} */}
@@ -156,6 +170,33 @@ function CollectionPage() {
               </h1>
               {/* </section> */}
               <Game game={game} game_id={game.game_atlas_id} />
+              <div className="modal-view">
+                <Modal
+                  opened={opened}
+                  onClose={close}
+                  title="House Rules"
+                  centered
+                >
+                  <form
+                    className="modal"
+                    onSubmit={(event) => {
+                      handleHouseRules(event, 1);
+                      close();
+                    }}
+                  >
+                    <textarea
+                      rows={10}
+                      className="modal-input"
+                      type="textarea"
+                      placeholder="Got any House rules???"
+                      onChange={handleChange}
+                    />
+                    <button id="modal-button" type="submit">
+                      Save
+                    </button>
+                  </form>
+                </Modal>
+              </div>
               <button className="button" onClick={open}>
                 Add House Rules
               </button>
