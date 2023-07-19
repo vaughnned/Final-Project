@@ -1,9 +1,10 @@
-As a Creator I want to be able to add my game to the database so that I can promote my game
+As a New user I want to be able to view the home page and search for games without logging in
 
-As a Creator I want to be able to edit my game in the database so that I can accurately display details of my game
+As a Logged in user I want to have access to my own personal colelction and a list of my friends
 
-As a Creator I want to be able to add custom games to my collection so that I can keep track of my works in progress
+As a Basic user I want to be able to add house rules to the games in my collection so that my friends can see how i play games differently
 
+As a Basic user I want to be able to edit my game in the database so that I can accurately display details of my game
 
 As a Basic user I want to be able to search for games so that I can see the best pricings and buy them
 
