@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/App.css";
+import { getGame, getPrice } from "./utils/api";
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -11,34 +12,25 @@ function GameDetail() {
 
   let { gameId } = useParams();
   useEffect(() => {
-    const getGames = async () => {
-      try {
-        let response = await fetch(
-          `https://api.boardgameatlas.com/api/search?ids=${gameId}&client_id=4Hi148hUNY`
-        );
-        const jsonData = await response.json();
+    getGame(gameId).then((g) => setGame(g));
+    getPrice(gameId).then((p) => setPriceList(p));
 
-        setGame(jsonData.games.shift());
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    const getPrice = async () => {
-      try {
-        let response = await fetch(
-          `https://api.boardgameatlas.com/api/game/prices?game_id=${gameId}&client_id=4Hi148hUNY`
-        );
-        const jsonData = await response.json();
-        console.log(jsonData);
+    // const getPrice = async () => {
+    //   try {
+    //     let response = await fetch(
+    //       `https://api.boardgameatlas.com/api/game/prices?game_id=${gameId}&client_id=4Hi148hUNY`
+    //     );
+    //     const jsonData = await response.json();
+    //     console.log(jsonData);
 
-        setPriceList(jsonData.gameWithPrices.us);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    //     setPriceList(jsonData.gameWithPrices.us);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
 
-    getGames();
-    getPrice();
+    // getGame();
+    // getPrice();
   }, [gameId]);
 
   const storeName = priceList.filter((item) => item.name.includes(game.name));
