@@ -70,7 +70,7 @@ class GetAvatarView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         print(self.kwargs, "SELF")
         id = self.kwargs["pk"]
-        return Profile.objects.filter(user_id=id)
+        return Profile.objects.filter(user=id)
     def perform_create(self, serializer):
         print(self.request, "REQUEST")
         serializer.save(image=self.request)

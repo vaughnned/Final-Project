@@ -32,14 +32,22 @@ const Home = () => {
 
   return (
     <>
+      {/* <img className="backdrop" src="/images/brick-wall.jpeg" alt="" /> */}
+      <img id="home-logo" src="/images/gameknight-logo.png" alt="" />
+      <img id="torch-left" src="/images/Torch.png" alt="" />
+      <img id="torch-right" src="/images/Torch.png" alt="" />
       <h1 className="title">Game Knight</h1>
       <p id="page-desc">
-        "Welcome to Game Knight! Here you can share your love for board games
-        with friends, by compare to see whose collection is more impressive, and
-        much more! With Game Knight you can see what games your friends own and
-        their reviews of other games, add to your own collection so you don't
-        forget what games you own, and keep track of whose the king of game
-        knight among your friends by logging what games you've played "
+        Welcome to Game Knight, the ultimate haven for all gaming enthusiasts!
+        Step into a realm where your gaming journey is bound to reach new
+        heights of excitement and camaraderie. Here, you have the power to
+        search for your favorite games, curate a personalized collection that
+        defines your gaming identity, and embark on a thrilling adventure
+        alongside your cherished companions. Unite with fellow gamers, compare
+        your awe-inspiring collections, and revel in the joy of shared passions.
+        Embrace the spirit of competition, discovery, and camaraderie as you
+        delve into a world that celebrates the art of gaming. So, join us, and
+        let the games begin!
       </p>
 
       {/* Search Feature */}

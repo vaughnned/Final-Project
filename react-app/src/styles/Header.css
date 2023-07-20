@@ -1,12 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Foldit&family=Roboto:ital@1&display=swap");
+
 #header {
-  background-color: #b04d1f;
+  background-color: #6c190e;
   border-bottom: solid 2px black;
 }
 
+.header-title {
+  position: absolute;
+  left: 75px;
+  top: 10px;
+  margin: 0px;
+  font-family: cursive;
+  color: rgb(12, 8, 8);
+  font-size: 30px;
+}
+
+.site-logo {
+  position: absolute;
+  height: 45px;
+  margin-top: 3px;
+}
+
 .pagenav {
-  padding: 2px 5px 0px 5px;
+  /* padding: 2px 5px 0px 5px; */
   float: left;
-  margin: 10px;
+  margin-left: 20px;
   color: white;
 }
 
@@ -16,6 +34,8 @@
   justify-content: flex-end;
   align-items: center;
   padding: 5px;
+  font-family: cursive;
+  /* font-family: "Roboto", sans-serif;s */
 }
 
 #head a {

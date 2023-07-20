@@ -16,13 +16,14 @@ export default function Header() {
     <>
       <header id="header">
         <a className="pagenav" href="/">
-          {/* <img src="/images/GameKnight.jpeg" alt="" /> */}
+          <img className="site-logo" src="/images/favicon.ico" alt="" />
+          <h1 className="header-title">Game Knight</h1>
         </a>
         <nav id="head">
           {user ? (
             <>
               <a href="/Collection">Armory</a>
-              <a href="/friends">Friends</a>
+              <a href="/friends">Companions</a>
               {/* <a href="/profile">Profile</a> */}
               <div>
                 <a href="#" onClick={logout}>

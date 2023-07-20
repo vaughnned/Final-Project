@@ -19,15 +19,18 @@ const LoginComponent = () => {
     setPassword(e.target.value);
   };
 
-  const getProfile = async (token, name, email) => {
-    const response = await fetch("http://localhost:8000/auth/user/profile/1/", {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${token}`,
-        "content-type": "application/json",
-        "X-CSRFToken": Cookies.get("csrftoken"),
-      },
-    });
+  const getProfile = async (token, name, email, userId) => {
+    const response = await fetch(
+      `http://localhost:8000/auth/user/profile/${userId}/`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${token}`,
+          "content-type": "application/json",
+          "X-CSRFToken": Cookies.get("csrftoken"),
+        },
+      }
+    );
     const data = await response.json();
     console.log(data, "DATA");
     setUser({
@@ -35,6 +38,7 @@ const LoginComponent = () => {
       email: email,
       token: token,
       avatar: data.image,
+      id: userId,
     });
   };
 
@@ -63,13 +67,19 @@ const LoginComponent = () => {
     });
 
     const data = await response.json();
-    console.log(data);
+    console.log(data, "this");
+    console.log(user, "fooo");
 
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
       Cookies.set("Authorization", `Token ${data.key}`);
-      await getProfile(data.key, username, "username@example.com");
+      await getProfile(
+        data.key,
+        username,
+        "username@example.com",
+        data.profile_id
+      );
       console.log(Cookies, "Cookie");
 
       setIsValid(true);
