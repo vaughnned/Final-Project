@@ -10,6 +10,8 @@ import { getGames } from "./utils/api";
 import { Loader } from "@mantine/core";
 
 const Home = () => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
   let [games, setGames] = useState([]);
   let searchRef = useRef("");
 
@@ -25,6 +27,8 @@ const Home = () => {
       setGames(g);
     });
   }
+
+  console.log(user, "user");
 
   return (
     <>

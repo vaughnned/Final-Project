@@ -41,6 +41,11 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 #         return HttpResponseNotAllowed(['POST'])
 
 
+# class GetProfileView(generics.ListCreateAPIView):
+#     serializer_class = ProfileSerializer
+
+#     def get_queryset(self):
+#         return (Profile.objects.all())
 
 class GetGameView(generics.ListCreateAPIView):
     serializer_class = GameSerializer

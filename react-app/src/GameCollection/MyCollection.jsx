@@ -20,9 +20,9 @@ function CollectionPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState(currentUser.avatar);
 
-  console.log(user, "woo");
+  console.log(currentUser, "woo");
 
   useEffect(() => {
     console.log(currentUser, "USER");
@@ -147,8 +147,11 @@ function CollectionPage() {
       },
     });
     const data = await response.json();
+    setAvatar(data.image);
+    setUser({ ...currentUser, avatar: data.image });
     console.log(data, "DATA");
-    return setUser({ avatar: data.image });
+    location.reload();
+    return data;
   };
 
   const editRules = (game) => {
@@ -164,7 +167,12 @@ function CollectionPage() {
       <div id="profile">
         {/* <img className="profile-pic" id="armory-pic" src="" alt="" /> */}
 
-        <Avatar src={user} alt="it's me" radius={100} size={200} />
+        <Avatar
+          src={currentUser.avatar}
+          alt="it's me"
+          radius={100}
+          size={200}
+        />
         <Group position="center">
           <FileButton onChange={setFile} accept="image/png,image/jpeg">
             {(props) => <Button {...props}>Upload image</Button>}

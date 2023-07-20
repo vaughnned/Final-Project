@@ -8,6 +8,7 @@ const LoginComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser, removeUser] = useLocalStorage("user");
+  // const [currentToken, setCurrentToken] = useState();
   const [profilePic, setProfilePic] = useState("");
   const navigate = useNavigate();
 
@@ -18,10 +19,29 @@ const LoginComponent = () => {
     setPassword(e.target.value);
   };
 
+  const getProfile = async (token, name, email) => {
+    const response = await fetch("http://localhost:8000/auth/user/profile/1/", {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    const data = await response.json();
+    console.log(data, "DATA");
+    setUser({
+      firstName: name,
+      email: email,
+      token: token,
+      avatar: data.image,
+    });
+  };
+
   const handleLogIn = async (e) => {
     e.preventDefault();
 
-    console.log("Cookie", Cookies.get("csrftoken"));
+    // console.log("Cookie", Cookies.get("csrftoken"));
     const options = {
       method: "POST",
       headers: {
@@ -48,21 +68,19 @@ const LoginComponent = () => {
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
-      setUser({
-        firstName: username,
-        email: "username@example.com",
-        token: data.key,
-        avatar: data,
-      });
       Cookies.set("Authorization", `Token ${data.key}`);
+      await getProfile(data.key, username, "username@example.com");
+      console.log(Cookies, "Cookie");
+
       setIsValid(true);
       navigate("/");
       location.reload();
     }
-    console.log(user, "USER");
 
     // if login is valid
   };
+  console.log(user, "USER");
+
   return (
     <div id="login-page">
       <section id="login-form">
