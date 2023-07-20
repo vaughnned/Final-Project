@@ -58,7 +58,7 @@ function Game({ game, game_id, owned = true }) {
           onClick={(e) =>
             addToCollection(e, {
               gameId: game.id,
-              gameTitle: game.handle,
+              gameTitle: game.name,
               gameImageUrl: game.image_url,
               gameToken: gameToken,
             })

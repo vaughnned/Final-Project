@@ -4,21 +4,22 @@ import Game from "../Game";
 import Cookies from "js-cookie";
 import { Avatar } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal, Group, Button } from "@mantine/core";
+import { Modal, Group, FileButton, Button, Text } from "@mantine/core";
 import useLocalStorage from "../utils/useLocalStorage";
 
 function CollectionPage() {
-  const [games, setGames] = useState([]);
+  const [currentGame, setCurrentGame] = useState([]);
   const [gameData, setGameData] = useState([]);
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user"))
   );
   const [user, setUser, removeUser] = useLocalStorage("user");
-
   const [houseRuleForm, setHouseRuleForm] = useState(true);
   const [houseRules, setHouseRules] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  // const [profilePic, setProfilePic] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {
     // setGameToken(user?.token);
@@ -82,7 +83,7 @@ function CollectionPage() {
     console.log(event, "EVENT");
     event.preventDefault();
     // console.log(e.target.value, "value");
-    const updateGame = async (gameId) => {
+    const updateGame = async () => {
       await fetch(`http://127.0.0.1:8000/collection/game/${game_id}/`, {
         method: "PATCH",
         headers: {
@@ -90,9 +91,9 @@ function CollectionPage() {
           "content-type": "application/json",
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
-        body: {
+        body: JSON.stringify({
           house_rules: houseRules,
-        },
+        }),
       })
         .then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -107,11 +108,18 @@ function CollectionPage() {
     updateGame();
   };
 
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   console.log(file);
-  //   setProfilePic(file.name);
-  // };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePic(file.name);
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   useEffect(() => {
     console.log(user, "CHANGE");
@@ -126,22 +134,56 @@ function CollectionPage() {
   //     profilePic: profilePic,
   //   });
   // };
+  const editRules = (game) => {
+    setCurrentGame(game);
+    open();
+  };
+  console.log(file, "FILE");
 
   return (
     <>
       {/* <h1 className="title">The Armory</h1> */}
       <div id="profile">
         {/* <img className="profile-pic" id="armory-pic" src="" alt="" /> */}
-        <Avatar
-          src={profilePic}
-          alt="it's me"
-          radius={100}
-          size={200}
-          onClick={open}
-        />
 
+        <Avatar src={file?.name} alt="it's me" radius={100} size={200} />
+        <Group position="center">
+          <FileButton onChange={setFile} accept="image/png,image/jpeg">
+            {(props) => <Button {...props}>Upload image</Button>}
+          </FileButton>
+        </Group>
+        {previewUrl && (
+          <img
+            src={previewUrl}
+            alt="Avatar Preview"
+            style={{ maxWidth: "200px" }}
+          />
+        )}
+
+        <div className="modal-view">
+          <Modal opened={opened} onClose={close} title="House Rules" centered>
+            <form
+              className="modal"
+              onSubmit={(event) => {
+                handleHouseRules(event, currentGame.id);
+                setCurrentGame(null);
+                close();
+              }}
+            >
+              <textarea
+                rows={10}
+                className="modal-input"
+                type="textarea"
+                placeholder="Got any House rules???"
+                onChange={handleChange}
+              />
+              <button id="modal-button" type="submit">
+                Save
+              </button>
+            </form>
+          </Modal>
+        </div>
         {/* {!houseRuleForm ? ( */}
-
         {/* ) : (
           ""
         )} */}
@@ -170,34 +212,7 @@ function CollectionPage() {
               </h1>
               {/* </section> */}
               <Game game={game} game_id={game.game_atlas_id} />
-              <div className="modal-view">
-                <Modal
-                  opened={opened}
-                  onClose={close}
-                  title="House Rules"
-                  centered
-                >
-                  <form
-                    className="modal"
-                    onSubmit={(event) => {
-                      handleHouseRules(event, 1);
-                      close();
-                    }}
-                  >
-                    <textarea
-                      rows={10}
-                      className="modal-input"
-                      type="textarea"
-                      placeholder="Got any House rules???"
-                      onChange={handleChange}
-                    />
-                    <button id="modal-button" type="submit">
-                      Save
-                    </button>
-                  </form>
-                </Modal>
-              </div>
-              <button className="button" onClick={open}>
+              <button className="button" onClick={() => editRules(game)}>
                 Add House Rules
               </button>
               |
