@@ -42,8 +42,6 @@ const RegisterComponent = () => {
     e.preventDefault();
 
     console.log("something");
-    const formData = new FormData();
-    formData.append("image", state.image);
     // formData.append("title", state.title);
     const options = {
       method: "POST",
@@ -56,7 +54,6 @@ const RegisterComponent = () => {
         email,
         password1,
         password2,
-        formData,
       }),
     };
 

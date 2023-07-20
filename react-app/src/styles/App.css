@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Foldit&family=Roboto:ital@1&display=swap");
 
-html {
-  /* background-color: #f0f0f0; */
-}
-
-body {
-  /* background-color: #f0f0f0; */
-}
-
 .backdrop {
   position: absolute;
   background-repeat: repeat;
@@ -20,10 +12,9 @@ body {
 
 .title {
   font-family: cursive;
-  /* font-family: "Roboto", sans-serif; */
   margin-top: 0px;
   font-size: 70px;
-  color: rgb(96, 111, 117);
+  color: rgb(204 218 206);
 }
 
 #home-logo {
@@ -38,24 +29,23 @@ body {
   left: 0px;
   top: 100px;
   height: 200px;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 #torch-right {
-  /* position: absolute;s */
   position: absolute;
   height: 200px;
   top: 100px;
   right: 0px;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 #page-desc {
-  font-family: cursive;
-  font-family: "Roboto", sans-serif;
+  font-family: MedievalSharp;
+  font-size: 22px;
   margin: 0 auto;
   width: 80%;
-  color: rgb(96, 111, 117);
+  color: rgb(204 218 206);
 }
 
 .search-form {
@@ -87,6 +77,11 @@ body {
   border-top-left-radius: 0px;
 }
 
+#game-card {
+  background-color: rgb(240, 231, 231);
+  background: 0.1;
+}
+
 .game-grid {
   width: 85%;
   display: flex;
@@ -109,9 +104,6 @@ body {
 
 .game-grid div div {
   box-shadow: 10px 5px 25px rgba(25, 24, 24, 0.412);
-
-  /* max-height: 275px;
-  overflow-y: scroll; */
 }
 
 .home-grid {
@@ -120,10 +112,10 @@ body {
 }
 
 .home-grid div {
-  background-color: rgba(118, 70, 70, 0.81);
+  background-color: rgba(240, 231, 231, 0.745);
 }
 
-.home-grid div:hover {
+.whole-card:hover {
   transform: translateY(-10px) scale(1.02);
 }
 
@@ -208,8 +200,9 @@ body {
   margin-top: 50px;
 }
 
-/* .gameimage:hover {
-} */
+#home-button {
+  margin-top: 30px;
+}
 
 .button {
   background-color: #44555e;
@@ -220,26 +213,10 @@ body {
 }
 
 #detail-page {
-  /* background-color: #f0f0f0; */
   height: 100%;
   width: 100%;
   padding-bottom: 50px;
 }
-
-/* #carousel {
-  display: flex;
-  border: solid 2px white;
-  background-color: black;
-  width: 80%;
-  margin: 0 auto;
-  height: 100%;
-}
-
-#carousel > * {
-  overflow-y: scroll;
-  color: black;
-  font-weight: bold;
-} */
 
 #avatar {
   margin-bottom: 10px;
@@ -251,6 +228,12 @@ body {
   height: 300px;
   width: 300px;
   opacity: 0.5;
+}
+
+.house-rule-display p {
+  height: fit-content;
+  padding: 5px;
+  border: solid 3px black;
 }
 
 #sword-right {
@@ -267,72 +250,24 @@ body {
   left: 50px;
 }
 
-.collection-list {
-  display: flex;
-  justify-content: space-around;
-  align-content: center;
-  flex-wrap: wrap;
-  margin: 100px 100px 0px 100px;
-}
-
-.collection-game {
-  max-width: 400px;
-  height: 400px;
-  margin-top: 20px;
-  border: solid 1px white;
-  border-radius: 10%;
-}
-
-.collection-title {
-  font-size: 35px;
-  padding: 10px;
-  margin: 0px;
-  border-bottom: solid 1px white;
-}
-
-.collection-image {
-  height: 343px;
-  width: 100%;
-}
-
 #friends-list {
   display: flex;
   flex-direction: column;
+  border-bottom: solid 5px rgb(81, 12, 12);
+  margin-top: 20px;
+  padding: 20px 0px;
 }
 
 .friend {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  height: 200px;
   width: 400px;
 }
 
-.modal-view {
-  position: absolute;
-  display: none;
-}
-
-.mantine-Modal-inner {
-  padding-left: 0px;
-}
-
-.modal {
-  display: flex;
-  flex-direction: column;
-}
-
-.modal textarea {
-  font-size: 2 0px;
-}
-
-.modal-button {
-  width: 30%;
-  align-self: flex-end;
-}
-
 .friend-details {
-  color: #2b4b5a;
+  font-family: MedievalSharp;
+  color: rgb(204 218 206);
   margin: 5px;
 }
 
@@ -342,6 +277,7 @@ body {
 
 #friend-title {
   border-bottom: solid 3px gray;
+  color: rgb(204 218 206);
   padding-bottom: 20px;
 }
 
@@ -382,19 +318,6 @@ body {
   background-size: 100%;
   background-repeat: repeat;
 }
-
-/* .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} */
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {

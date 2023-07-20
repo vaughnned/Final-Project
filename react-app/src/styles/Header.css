@@ -2,16 +2,16 @@
 
 #header {
   background-color: #6c190e;
-  border-bottom: solid 2px black;
+  border: solid 3px black;
 }
 
 .header-title {
   position: absolute;
   left: 75px;
-  top: 10px;
+  top: 8px;
   margin: 0px;
   font-family: cursive;
-  color: rgb(12, 8, 8);
+  color: rgb(204 218 206);
   font-size: 30px;
 }
 
@@ -35,10 +35,12 @@
   align-items: center;
   padding: 5px;
   font-family: cursive;
+  font-size: 30px;
+
   /* font-family: "Roboto", sans-serif;s */
 }
 
 #head a {
   margin: 10px;
-  color: white;
+  color: rgb(204 218 206);
 }

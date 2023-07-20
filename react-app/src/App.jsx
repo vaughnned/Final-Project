@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./styles/index.css";
 import Cookies from "js-cookie";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
@@ -32,14 +32,6 @@ function App() {
           <Route path="/Register" element={<Register />} />
 
           <Route path="/Detail/:gameId" element={<GameDetail />} />
-          {/* <Route
-            path="/Profile"
-            element={
-              <Protected isLoggedIn={cookie}>
-                <ProfileComponent />
-              </Protected>
-            }
-          /> */}
           <Route
             path="/Friends"
             element={

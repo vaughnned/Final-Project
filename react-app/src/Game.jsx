@@ -6,7 +6,6 @@ function Game({ game, game_id, owned = true }) {
   const [gameToken, setGameToken] = useState("");
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
-  // useEffect(() => {
   setTimeout(() => setGameToken(user?.token), 1000);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ function Game({ game, game_id, owned = true }) {
   }
 
   return (
-    <div>
+    <div id="game-card">
       <a href={`/Detail/${game_id}`}>
         <img className="gameimage" src={game.image_url} alt="" />
       </a>
@@ -54,6 +53,7 @@ function Game({ game, game_id, owned = true }) {
       {/* add a "house rule" option if the game is already owned */}
       {!owned ? (
         <button
+          id="home-button"
           className="button"
           onClick={(e) =>
             addToCollection(e, {

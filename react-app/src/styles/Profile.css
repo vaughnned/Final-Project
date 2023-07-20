@@ -27,13 +27,15 @@ h1 {
   align-items: center;
   padding-left: 20px;
   margin-top: 50px;
+
+  margin-bottom: 30px;
 }
 
 .profile-pic {
-  border: solid 2px red;
+  border: solid 2px black;
   border-radius: 100px;
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
 }
 
 #profile-username {

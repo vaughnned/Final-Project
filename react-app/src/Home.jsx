@@ -63,46 +63,15 @@ const Home = () => {
         </button>
       </form>
 
-      {/* <div id="carousel">
-        <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
-          {games.map((game, index) => (
-            <Carousel.Slide key={index}>
-              <a href={`/Detail/${game.id}`}>
-                <h1 className="gametitle">{game.handle.toUpperCase()}</h1>
-                <img className="gameimage" src={game.image_url} alt="" />
-              </a>
-            </Carousel.Slide>
-          ))}
-        </Carousel>
-        <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
-          {games.map((game, index) => (
-            <Carousel.Slide key={index}>
-              <a href={`/Detail/${game.id}`}>
-                <h1 className="gametitle">{game.handle.toUpperCase()}</h1>
-                <img className="gameimage" src={game.image_url} alt="" />
-              </a>
-            </Carousel.Slide>
-          ))}
-        </Carousel>
-        <Carousel id="carousel" maw={320} mx="auto" withIndicators height={300}>
-          {games.map((game, index) => (
-            <Carousel.Slide key={index}>
-              <a href={`/Detail/${game.id}`}>
-                <h1 className="gametitle">{game.handle.toUpperCase()}</h1>
-                <img className="gameimage" src={game.image_url} alt="" />
-              </a>
-            </Carousel.Slide>
-          ))}
-        </Carousel>
-      </div> */}
-
       {/* Make this a component for re-use */}
       <div className="game-grid home-grid">
         {games.length <= 0 ? (
           <Loader />
         ) : (
           games.map((game) => (
-            <Game game={game} game_id={game.id} key={game.id} owned={false} />
+            <section className="whole-card">
+              <Game game={game} game_id={game.id} key={game.id} owned={false} />
+            </section>
           ))
         )}
       </div>

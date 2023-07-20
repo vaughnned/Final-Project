@@ -23,8 +23,9 @@ export default function Header() {
           {user ? (
             <>
               <a href="/Collection">Armory</a>
+              <p>|</p>
               <a href="/friends">Companions</a>
-              {/* <a href="/profile">Profile</a> */}
+              <p>|</p>
               <div>
                 <a href="#" onClick={logout}>
                   Logout

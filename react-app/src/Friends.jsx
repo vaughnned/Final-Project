@@ -7,7 +7,6 @@ export default function FriendsList() {
   const [userData, setUserData] = useState([]);
   let [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const navigate = useNavigate();
-  // console.log(user);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +31,9 @@ export default function FriendsList() {
 
   return (
     <>
-      <h1 id="friend-title">Friends</h1>
+      <h1 id="friend-title" className="title">
+        Companions
+      </h1>
 
       {userData.map((knight, index) => (
         <div key={index} id="friends-list">
@@ -41,39 +42,17 @@ export default function FriendsList() {
           </div>
           <div className="friend">
             <h1 className="friend-details">{knight.username}</h1>
-            <h2 className="friend-details">
+            {/* <h2 className="friend-details">
               {knight.username}'s favorite game is:
-            </h2>
+            </h2> */}
             <h3 className="friend-details">
-              <a href={`collection/${knight.user}`}>View Profile</a>
+              <a href={`collection/${knight.user}`}>
+                View {knight.username}'s Armory
+              </a>
             </h3>
           </div>
         </div>
       ))}
-      {/* <div id="friends-list">
-        <h1 id="friend-title">Friends</h1>
-        <div className="friend">
-          <h1 className="friend-details">Joe Shmo</h1>
-          <h2 className="friend-details">Joe's favorite game is:</h2>
-          <h3 className="friend-details">
-            <a href="#">View Profile</a>
-          </h3>
-        </div>
-        <div className="friend">
-          <h1 className="friend-details">Jill Shmill</h1>
-          <h2 className="friend-details">Jill's favorite game is:</h2>
-          <h3 className="friend-details">
-            <a href="#">View Profile</a>
-          </h3>
-        </div>
-        <div className="friend">
-          <h1 className="friend-details">John Shmon</h1>
-          <h2 className="friend-details">John's favorite game is:</h2>
-          <h3 className="friend-details">
-            <a href="#">View Profile</a>
-          </h3>
-        </div>
-      </div> */}
     </>
   );
 }

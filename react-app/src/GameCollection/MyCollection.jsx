@@ -4,7 +4,7 @@ import Game from "../Game";
 import Cookies from "js-cookie";
 import { Avatar } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal, Group, FileButton, Button, Text } from "@mantine/core";
+import { Modal, Group, FileButton, Button } from "@mantine/core";
 import useLocalStorage from "../utils/useLocalStorage";
 
 function CollectionPage() {
@@ -20,7 +20,6 @@ function CollectionPage() {
   const [previewUrl, setPreviewUrl] = useState("");
   const [hide, setHide] = useState(true);
   const [modalHidden, setModalHidden] = useState(true);
-  const [houseData, setHouseData] = useState("");
 
   useEffect(() => {
     const getUserGames = async () => {
@@ -39,13 +38,8 @@ function CollectionPage() {
       setGameData(data);
     };
     getUserGames();
-    // load game ids from the game model
-    // console.log(gameData, "GAMEDATA");
-    // getGames({ ids: gameData }).then((g) => {
-    //   setGames(g);
-    // });
   }, []);
-  // make a useEffect and redirect if user isnt logged in
+
   const deleteGame = async (gameId) => {
     await fetch(`http://127.0.0.1:8000/collection/delete/${gameId}/`, {
       method: "DELETE",
@@ -65,10 +59,6 @@ function CollectionPage() {
         console.error("THIS ISNT WORKING", error);
       });
   };
-
-  // const houseRuleForms = () => {
-  //   setHouseRuleForm(false);
-  // };
 
   const handleChange = (e) => {
     setHouseRules(e.target.value);
@@ -90,7 +80,6 @@ function CollectionPage() {
       })
         .then((response) => {
           if (response.status >= 200 && response.status < 300) {
-            // window.location.reload();
             return response;
           }
         })
@@ -98,22 +87,7 @@ function CollectionPage() {
           console.error("THIS ISNT WORKING", error);
         });
     };
-    const getHouseRules = async () => {
-      const response = await fetch(
-        `http://127.0.0.1:8000/collection/game/${game_id}/`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Token ${currentUser?.token}`,
-            "content-type": "application/json",
-            "X-CSRFToken": Cookies.get("csrftoken"),
-          },
-        }
-      );
-      const data = await response.json();
-      console.log(data.house_rules, "house data");
-      return setHouseData(data.house_rules);
-    };
+
     await updateGame();
     await getHouseRules();
   };
@@ -152,7 +126,7 @@ function CollectionPage() {
   const hideModal = () => {
     setModalHidden(false);
   };
-
+  console.log(currentGame);
   return (
     <>
       <div id="profile">
@@ -188,10 +162,14 @@ function CollectionPage() {
         <div className="modal-view">
           <Modal opened={opened} onClose={close} title="House Rules" centered>
             {modalHidden ? (
-              <>
-                <p>HEY{houseData}</p>
+              <div className="house-rule-display">
+                <p>
+                  <strong>My Rules:</strong>
+                  <br />
+                  {currentGame.house_rules}
+                </p>
                 <button onClick={hideModal}>Edit House Rules</button>
-              </>
+              </div>
             ) : (
               <form
                 className="modal"
@@ -217,19 +195,6 @@ function CollectionPage() {
             )}
           </Modal>
         </div>
-        {/* {!houseRuleForm ? ( */}
-        {/* ) : (
-          ""
-        )} */}
-        {/* <Modal opened={opened} onClose={close} title="Authentication" centered>
-          <form onSubmit={handleSubmit}>
-            <input type="file" accept="image/*" onChange={handleFileChange} />
-            <button type="Submit">Save</button>
-          </form>
-        </Modal> */}
-        {/* 
-        <h1 id="profile-username">{user.firstName}</h1>
-        <h3 id="profile-desc">Favorite Game:</h3> */}
       </div>
 
       <h1 className="title">{currentUser.firstName}'s Armory</h1>
@@ -239,15 +204,13 @@ function CollectionPage() {
 
         <div className="game-grid home-grid">
           {gameData.map((game) => (
-            <div key={game.game_atlas_id}>
-              {/* <section className="collection-title"> */}
+            <div className="whole-card" key={game.game_atlas_id}>
               <h1 className="collection-title">
                 {game.title.replace(/-/g, " ").toUpperCase()}
               </h1>
-              {/* </section> */}
               <Game game={game} game_id={game.game_atlas_id} />
               <button className="button" onClick={() => editRules(game)}>
-                Add House Rules
+                View House Rules
               </button>
               |
               <button className="button" onClick={() => deleteGame(game.id)}>

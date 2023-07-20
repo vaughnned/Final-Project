@@ -1,38 +1,27 @@
-/* #collection-grid div div {
-  background-color: white;
-  box-shadow: none;
-} */
-
-/* #collection-grid div {
-  background-color: #f5c08e;
-}
-
-#collection-grid div h1 {
-  margin: 10px;
+.collection-list {
   display: flex;
+  justify-content: space-around;
+  align-content: center;
   flex-wrap: wrap;
-  justify-content: center;
-} */
-
-/* .collection-title {
-  border: solid 5px rgba(25, 24, 24, 0.412);
-  border-bottom: none;
-  text-align: center;
-  height: 50px;
-  padding: 30px;
+  margin: 100px 100px 0px 100px;
 }
-.collection-title h1 {
-  margin: 0px;
-} */
 
 .collection-title {
+  padding: 10px;
   height: 75px;
+  font-size: 35px;
   max-height: 90px;
   overflow: scroll;
   margin: 0 auto;
   background-color: #73868f;
   text-align: center;
   border: solid 5px rgb(56, 64, 64);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  color: rgb(204 218 206);
+
+  font-family: MedievalSharp cursive;
 }
 
 .collection-title h1 {
@@ -42,4 +31,40 @@
   margin: 0px;
   line-height: 2;
   color: #211818;
+}
+
+.collection-image {
+  height: 343px;
+  width: 100%;
+}
+
+.collection-game {
+  max-width: 400px;
+  height: 400px;
+  margin-top: 20px;
+  border: solid 1px white;
+  border-radius: 10%;
+}
+
+.modal-view {
+  position: absolute;
+  display: none;
+}
+
+.mantine-Modal-inner {
+  padding-left: 0px;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal textarea {
+  font-size: 2 0px;
+}
+
+.modal-button {
+  width: 30%;
+  align-self: flex-end;
 }
