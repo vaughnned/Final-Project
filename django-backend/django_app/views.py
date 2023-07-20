@@ -1,11 +1,12 @@
 import json
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login, logout
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.http import HttpResponseNotAllowed, HttpResponse
 from .models import GameModel
+from accounts.models import Profile, User
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import GameSerializer
+from accounts.serializers import ProfileSerializer, UserSerializer
 from rest_framework import generics
 
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -57,6 +58,17 @@ class GetFriendsGameView(generics.ListCreateAPIView):
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return (GameModel.objects.filter(user=user_id))
+    
+class GetAvatarView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        print(self.kwargs, "SELF")
+        id = self.kwargs["pk"]
+        return Profile.objects.filter(user_id=id)
+    def perform_create(self, serializer):
+        print(self.request, "REQUEST")
+        serializer.save(image=self.request)
         
     
 class UpdateGameView(generics.RetrieveUpdateDestroyAPIView):

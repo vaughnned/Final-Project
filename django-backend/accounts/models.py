@@ -12,11 +12,10 @@ class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, unique=True
     )
-    image = models.ImageField(upload_to='profile_images', blank=True)
+    image = models.ImageField(upload_to='profile_images/', null=True)
 
-   
 
     def __str__(self):
         return self.user.username
     
-    User.profile = property(lambda u: Profile.objects.get_or_create(user=u)[0])
+User.profile = property(lambda u: Profile.objects.get_or_create(user=u)[0])

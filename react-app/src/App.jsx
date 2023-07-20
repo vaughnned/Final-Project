@@ -6,7 +6,6 @@ import Home from "./Home.jsx";
 import CollectionPage from "./GameCollection/MyCollection.jsx";
 import Login from "./Login/Login";
 import GameDetail from "./GameDetail";
-import ProfileComponent from "./Profile";
 import Protected from "./Login/Protected";
 import FriendsList from "./Friends";
 import Register from "./Login/Register";
@@ -15,7 +14,6 @@ import FriendCollection from "./GameCollection/FriendCollection.jsx";
 
 function App() {
   const cookie = Cookies.get("Authorization");
-  const [collectionData, setCollectionData] = useState([]);
 
   return (
     <BrowserRouter basename="/">
@@ -34,14 +32,14 @@ function App() {
           <Route path="/Register" element={<Register />} />
 
           <Route path="/Detail/:gameId" element={<GameDetail />} />
-          <Route
+          {/* <Route
             path="/Profile"
             element={
               <Protected isLoggedIn={cookie}>
                 <ProfileComponent />
               </Protected>
             }
-          />
+          /> */}
           <Route
             path="/Friends"
             element={

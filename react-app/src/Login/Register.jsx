@@ -76,7 +76,7 @@ const RegisterComponent = () => {
         firstName: "Vaughn",
         email: "vaughn@nedderman.com",
         token: data.key,
-        image: data,
+        avatar: "FOO",
       });
 
       console.log(user);

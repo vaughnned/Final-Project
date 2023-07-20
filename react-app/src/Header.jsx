@@ -16,7 +16,7 @@ export default function Header() {
     <>
       <header id="header">
         <a className="pagenav" href="/">
-          Home
+          {/* <img src="/images/GameKnight.jpeg" alt="" /> */}
         </a>
         <nav id="head">
           {user ? (

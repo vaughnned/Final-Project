@@ -43,6 +43,8 @@ const LoginComponent = () => {
     });
 
     const data = await response.json();
+    console.log(data);
+
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
@@ -50,6 +52,7 @@ const LoginComponent = () => {
         firstName: username,
         email: "username@example.com",
         token: data.key,
+        avatar: data,
       });
       Cookies.set("Authorization", `Token ${data.key}`);
       setIsValid(true);

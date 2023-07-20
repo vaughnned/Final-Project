@@ -14,16 +14,17 @@ function CollectionPage() {
     JSON.parse(localStorage.getItem("user"))
   );
   const [user, setUser, removeUser] = useLocalStorage("user");
-  const [houseRuleForm, setHouseRuleForm] = useState(true);
+  // const [houseRuleForm, setHouseRuleForm] = useState(true);
   const [houseRules, setHouseRules] = useState("");
   // const [profilePic, setProfilePic] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
+  const [avatar, setAvatar] = useState();
+
+  console.log(user, "woo");
 
   useEffect(() => {
-    // setGameToken(user?.token);
-    // console.log(user?.token);
     console.log(currentUser, "USER");
 
     const getUserGames = async () => {
@@ -71,9 +72,9 @@ function CollectionPage() {
       });
   };
 
-  const houseRuleForms = () => {
-    setHouseRuleForm(false);
-  };
+  // const houseRuleForms = () => {
+  //   setHouseRuleForm(false);
+  // };
 
   const handleChange = (e) => {
     setHouseRules(e.target.value);
@@ -82,7 +83,6 @@ function CollectionPage() {
   const handleHouseRules = async (event, game_id) => {
     console.log(event, "EVENT");
     event.preventDefault();
-    // console.log(e.target.value, "value");
     const updateGame = async () => {
       await fetch(`http://127.0.0.1:8000/collection/game/${game_id}/`, {
         method: "PATCH",
@@ -108,22 +108,22 @@ function CollectionPage() {
     updateGame();
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setProfilePic(file.name);
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setProfilePic(file.name);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewUrl(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPreviewUrl(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
-  useEffect(() => {
-    console.log(user, "CHANGE");
-  }, [user]);
+  // useEffect(() => {
+  //   setAvatar(getImage(currentUser));
+  // }, [user]);
 
   // const handleSubmit = () => {
   //   // e.preventDefault();
@@ -134,11 +134,29 @@ function CollectionPage() {
   //     profilePic: profilePic,
   //   });
   // };
+
+  const addImage = async (imgSrc, user) => {
+    const formData = new FormData();
+    formData.append("image", imgSrc);
+    let response = await fetch(`http://localhost:8000/collection/avatar/1/`, {
+      method: "PATCH",
+      body: formData,
+      headers: {
+        Authorization: `Token ${user?.token}`,
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    const data = await response.json();
+    console.log(data, "DATA");
+    return setUser({ avatar: data.image });
+  };
+
   const editRules = (game) => {
     setCurrentGame(game);
     open();
   };
   console.log(file, "FILE");
+  console.log(user, "AVATAR");
 
   return (
     <>
@@ -146,11 +164,12 @@ function CollectionPage() {
       <div id="profile">
         {/* <img className="profile-pic" id="armory-pic" src="" alt="" /> */}
 
-        <Avatar src={file?.name} alt="it's me" radius={100} size={200} />
+        <Avatar src={user} alt="it's me" radius={100} size={200} />
         <Group position="center">
           <FileButton onChange={setFile} accept="image/png,image/jpeg">
             {(props) => <Button {...props}>Upload image</Button>}
           </FileButton>
+          <button onClick={() => addImage(file, currentUser)}>Save</button>
         </Group>
         {previewUrl && (
           <img
