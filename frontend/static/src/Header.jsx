@@ -6,11 +6,33 @@ import navImg from "./images/favicon.ico";
 export default function Header() {
   let [user, setUser, removeUser] = useLocalStorage("user");
   const navigate = useNavigate();
+  const cookie = Cookies.get("Authorization");
 
-  function logout() {
-    removeUser();
-    Cookies.remove("Authorization");
-    navigate("#");
+  const handleError = (err) => {
+    console.log(err);
+  };
+
+  async function logout() {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+      body: JSON.stringify(user),
+    };
+    const response = await fetch("/dj-rest-auth/logout/", options).catch(
+      handleError
+    );
+    if (!response.ok) {
+      throw new Error("Oops! Something went wrong");
+    } else {
+      const data = await response.json();
+      Cookies.remove("Authorization", `Token${" "}${data.key}`);
+      removeUser();
+
+      navigate("/");
+    }
   }
 
   return (
@@ -21,7 +43,7 @@ export default function Header() {
           <h1 className="header-title">Game Knight</h1>
         </a>
         <nav id="head">
-          {user ? (
+          {cookie ? (
             <>
               <a href="/Collection">Armory</a>
               <p>|</p>

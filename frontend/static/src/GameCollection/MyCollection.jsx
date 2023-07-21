@@ -6,6 +6,7 @@ import { Avatar } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Group, FileButton, Button } from "@mantine/core";
 import useLocalStorage from "../utils/useLocalStorage";
+import sword from "../images/sword.png";
 
 function CollectionPage() {
   const [currentGame, setCurrentGame] = useState([]);
@@ -126,7 +127,7 @@ function CollectionPage() {
   return (
     <>
       <div id="profile">
-        <img src="/images/sword.png" id="sword-left" alt="" />
+        <img src={sword} id="sword-left" alt="" />
         <Avatar
           id="avatar"
           onClick={hideButton}
@@ -135,7 +136,7 @@ function CollectionPage() {
           radius={100}
           size={200}
         />
-        <img src="/images/sword.png" id="sword-right" alt="" />
+        <img src={sword} id="sword-right" alt="" />
 
         {!hide ? (
           <Group position="center">

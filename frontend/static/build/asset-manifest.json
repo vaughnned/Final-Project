@@ -1,17 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.db7ae423.css",
-    "main.js": "/static/js/main.dbde40d0.js",
+    "main.js": "/static/js/main.effcef78.js",
+    "static/media/sword.png": "/static/media/sword.acd87dba9c5be38a1c0b.png",
     "static/media/Torch.png": "/static/media/Torch.04d4437f255af7f3baa6.png",
     "static/media/gameknight-logo.png": "/static/media/gameknight-logo.880acaf4e61161920e8c.png",
     "static/media/favicon.ico": "/static/media/favicon.e7a8deea7a8a7536db47.ico",
     "static/media/brick-wall.jpeg": "/static/media/brick-wall.363e4c3f04bfd432c3d2.jpeg",
     "index.html": "/index.html",
     "main.db7ae423.css.map": "/static/css/main.db7ae423.css.map",
-    "main.dbde40d0.js.map": "/static/js/main.dbde40d0.js.map"
+    "main.effcef78.js.map": "/static/js/main.effcef78.js.map"
   },
   "entrypoints": [
     "static/css/main.db7ae423.css",
-    "static/js/main.dbde40d0.js"
+    "static/js/main.effcef78.js"
   ]
 }

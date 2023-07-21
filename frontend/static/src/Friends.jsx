@@ -35,24 +35,26 @@ export default function FriendsList() {
         Companions, Compatriots, etc.
       </h1>
 
-      {userData.map((knight, index) => (
-        <div key={index} id="friends-list">
-          <div>
-            <img className="profile-pic" src={knight.image} />
-          </div>
-          <div className="friend">
-            <h1 className="friend-details">{knight.username}</h1>
-            {/* <h2 className="friend-details">
+      {userData
+        .filter((userList) => userList.username !== user.username)
+        .map((knight, index) => (
+          <div key={index} id="friends-list">
+            <div>
+              <img className="profile-pic" src={knight.image} />
+            </div>
+            <div className="friend">
+              <h1 className="friend-details">{knight.username}</h1>
+              {/* <h2 className="friend-details">
               {knight.username}'s favorite game is:
             </h2> */}
-            <h3 className="friend-details">
-              <a href={`/friend-collection/${knight.user}`}>
-                View {knight.username}'s Armory
-              </a>
-            </h3>
+              <h3 className="friend-details">
+                <a href={`/friend-collection/${knight.user}`}>
+                  View {knight.username}'s Armory
+                </a>
+              </h3>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </>
   );
 }

@@ -11,7 +11,6 @@ const LoginComponent = () => {
   // const [currentToken, setCurrentToken] = useState();
   const [profilePic, setProfilePic] = useState("");
   const navigate = useNavigate();
-
   const handleUsernameInput = (e) => {
     setUsername(e.target.value);
   };
@@ -29,7 +28,6 @@ const LoginComponent = () => {
       },
     });
     const data = await response.json();
-    console.log(data, "DATA");
     setUser({
       firstName: name,
       email: email,
@@ -42,12 +40,11 @@ const LoginComponent = () => {
   const handleLogIn = async (e) => {
     e.preventDefault();
 
-    // console.log("Cookie", Cookies.get("csrftoken"));
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-CSRFToken": Cookies.get("csrftsoken"),
+        "X-CSRFToken": Cookies.get("csrftoken"),
       },
       body: JSON.stringify({
         username: username,
@@ -61,9 +58,6 @@ const LoginComponent = () => {
     });
 
     const data = await response.json();
-    console.log(data, "this");
-    console.log(user, "fooo");
-
     if (!response.ok) {
       alert("Incorrect username or password");
     } else {
@@ -74,16 +68,10 @@ const LoginComponent = () => {
         "username@example.com",
         data.profile_id
       );
-      console.log(Cookies, "Cookie");
-
       setIsValid(true);
       navigate("/");
-      // location.reload();
     }
-
-    // if login is valid
   };
-  console.log(user, "USER");
 
   return (
     <div id="login-page">
