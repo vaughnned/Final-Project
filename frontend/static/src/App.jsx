@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles/index.css";
 import Cookies from "js-cookie";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
@@ -11,9 +11,15 @@ import FriendsList from "./Friends";
 import Register from "./Login/Register";
 import Header from "./Header";
 import FriendCollection from "./GameCollection/FriendCollection.jsx";
+import icon from "./images/favicon.ico";
 
 function App() {
   const cookie = Cookies.get("Authorization");
+
+  useEffect(() => {
+    const favicon = document.getElementById("favicon");
+    favicon.setAttribute("href", icon);
+  }, []);
 
   return (
     <BrowserRouter basename="/">
@@ -41,7 +47,7 @@ function App() {
             }
           />
           <Route
-            path="/collection/:id"
+            path="/friend-collection/:id"
             element={
               <Protected isLoggedIn={cookie}>
                 <FriendCollection />

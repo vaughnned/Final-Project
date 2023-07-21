@@ -16,11 +16,12 @@ function GameDetail() {
   }, [gameId]);
 
   useEffect(() => {
-    getPrice(gameId).then((prices) => {
-      console.log(prices, "prices");
-      console.log(game, "prices");
-
-      setStores(prices.filter((item) => item.name.includes(game?.name)));
+    getPrice(gameId).then((price) => {
+      setStores(
+        price.filter((item, index) => {
+          return item.name.includes(game?.name);
+        })
+      );
     });
   }, [gameId, game]);
 

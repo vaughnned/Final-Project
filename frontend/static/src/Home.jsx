@@ -8,6 +8,8 @@ import "./styles/Login.css";
 import Game from "./Game";
 import { getGames } from "./utils/api";
 import { Loader } from "@mantine/core";
+import torch from "./images/Torch.png";
+import logo from "./images/gameknight-logo.png";
 
 const Home = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
@@ -33,9 +35,9 @@ const Home = () => {
   return (
     <>
       {/* <img className="backdrop" src="/images/brick-wall.jpeg" alt="" /> */}
-      <img id="home-logo" src="/images/gameknight-logo.png" alt="" />
-      <img id="torch-left" src="/images/Torch.png" alt="" />
-      <img id="torch-right" src="/images/Torch.png" alt="" />
+      <img id="home-logo" src={logo} alt="" />
+      <img id="torch-left" src={torch} alt="" />
+      <img id="torch-right" src={torch} alt="" />
       <h1 className="title">Game Knight</h1>
       <p id="page-desc">
         Welcome to Game Knight, the ultimate haven for all gaming enthusiasts!

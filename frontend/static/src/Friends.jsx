@@ -26,6 +26,9 @@ export default function FriendsList() {
     fetchData();
   }, []);
 
+  const auth = Cookies.get("Authorization");
+
+  console.log(auth);
   return (
     <>
       <h1 id="friend-title" className="title">
@@ -43,7 +46,7 @@ export default function FriendsList() {
               {knight.username}'s favorite game is:
             </h2> */}
             <h3 className="friend-details">
-              <a href={`collection/${knight.user}`}>
+              <a href={`/friend-collection/${knight.user}`}>
                 View {knight.username}'s Armory
               </a>
             </h3>

@@ -1,6 +1,7 @@
 import useLocalStorage from "./utils/useLocalStorage";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import navImg from "./images/favicon.ico";
 
 export default function Header() {
   let [user, setUser, removeUser] = useLocalStorage("user");
@@ -16,7 +17,7 @@ export default function Header() {
     <>
       <header id="header">
         <a className="pagenav" href="/">
-          <img className="site-logo" src="/images/favicon.ico" alt="" />
+          <img className="site-logo" src={navImg} alt="" />
           <h1 className="header-title">Game Knight</h1>
         </a>
         <nav id="head">
