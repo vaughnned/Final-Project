@@ -23,7 +23,7 @@ function Game({ game, game_id, owned = true }) {
     console.log(gameTitle, "Title");
     console.log(gameToken, "Token");
 
-    await fetch(`http://127.0.0.1:8000/collection/`, {
+    await fetch(`/collection/`, {
       method: "POST",
       headers: {
         Authorization: `Token ${user?.token}`,

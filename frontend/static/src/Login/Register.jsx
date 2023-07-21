@@ -57,12 +57,11 @@ const RegisterComponent = () => {
       }),
     };
 
-    const response = await fetch(
-      "http://127.0.0.1:8000/dj-rest-auth/registration/",
-      options
-    ).catch((error) => {
-      console.error("THIS ISNT WORKING", error);
-    });
+    const response = await fetch("/dj-rest-auth/registration/", options).catch(
+      (error) => {
+        console.error("THIS ISNT WORKING", error);
+      }
+    );
 
     const data = await response.json();
     if (!response.ok) {

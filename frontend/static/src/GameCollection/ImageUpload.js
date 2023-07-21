@@ -1,7 +1,7 @@
 // import Cookies from "js-cookie";
 
 // export const getImage = async (user) => {
-//   let response = await fetch(`http://localhost:8000/auth/user/profile/`, {
+//   let response = await fetch(`/auth/user/profile/`, {
 //     method: "GET",
 //     headers: {
 //       Authorization: `Token ${user?.token}`,

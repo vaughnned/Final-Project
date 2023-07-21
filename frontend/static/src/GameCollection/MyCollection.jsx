@@ -32,7 +32,7 @@ function CollectionPage() {
         },
       };
 
-      let response = await fetch(`http://127.0.0.1:8000/collection/`, options);
+      let response = await fetch(`/collection/`, options);
 
       const data = await response.json();
       setGameData(data);
@@ -41,7 +41,7 @@ function CollectionPage() {
   }, []);
 
   const deleteGame = async (gameId) => {
-    await fetch(`http://127.0.0.1:8000/collection/delete/${gameId}/`, {
+    await fetch(`/collection/delete/${gameId}/`, {
       method: "DELETE",
       headers: {
         Authorization: `Token ${currentUser?.token}`,
@@ -67,7 +67,7 @@ function CollectionPage() {
   const handleHouseRules = async (event, game_id) => {
     event.preventDefault();
     const updateGame = async () => {
-      await fetch(`http://127.0.0.1:8000/collection/game/${game_id}/`, {
+      await fetch(`/collection/game/${game_id}/`, {
         method: "PATCH",
         headers: {
           Authorization: `Token ${currentUser?.token}`,
@@ -94,17 +94,14 @@ function CollectionPage() {
   const addImage = async (imgSrc, user) => {
     const formData = new FormData();
     formData.append("image", imgSrc);
-    let response = await fetch(
-      `http://localhost:8000/auth/user/profile/${user.id}/`,
-      {
-        method: "PATCH",
-        body: formData,
-        headers: {
-          Authorization: `Token ${user?.token}`,
-          "X-CSRFToken": Cookies.get("csrftoken"),
-        },
-      }
-    );
+    let response = await fetch(`/auth/user/profile/${user.id}/`, {
+      method: "PATCH",
+      body: formData,
+      headers: {
+        Authorization: `Token ${user?.token}`,
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
     const data = await response.json();
 
     setUser({ ...currentUser, avatar: data.image });

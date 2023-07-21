@@ -18,10 +18,7 @@ export default function FriendsList() {
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
       };
-      let response = await fetch(
-        "http://127.0.0.1:8000/auth/user/profile/",
-        options
-      );
+      let response = await fetch("/auth/user/profile/", options);
       const data = await response.json();
       console.log(data, "DATA");
       setUserData(data);

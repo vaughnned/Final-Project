@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 
 export const getUserGames = async () => {
-  let response = await fetch(`http://127.0.0.1:8000/collection/`, {
+  let response = await fetch(`/collection/`, {
     method: "GET",
     headers: {
       "content-type": "application/json",

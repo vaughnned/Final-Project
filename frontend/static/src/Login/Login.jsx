@@ -20,17 +20,14 @@ const LoginComponent = () => {
   };
 
   const getProfile = async (token, name, email, userId) => {
-    const response = await fetch(
-      `http://localhost:8000/auth/user/profile/${userId}/`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Token ${token}`,
-          "content-type": "application/json",
-          "X-CSRFToken": Cookies.get("csrftoken"),
-        },
-      }
-    );
+    const response = await fetch(`/auth/user/profile/${userId}/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
     const data = await response.json();
     console.log(data, "DATA");
     setUser({
@@ -59,10 +56,7 @@ const LoginComponent = () => {
     };
     console.log(options.headers, "HEADERS");
 
-    const response = await fetch(
-      "http://localhost:8000/auth/login/",
-      options
-    ).catch((error) => {
+    const response = await fetch("/auth/login/", options).catch((error) => {
       console.error("THIS ISNT WORKING", error);
     });
 

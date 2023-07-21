@@ -13,7 +13,7 @@ function FriendCollection() {
 
   useEffect(() => {
     const getFriendCollection = async (id) => {
-      const response = await fetch(`http://127.0.0.1:8000/collection/${id}/`, {
+      const response = await fetch(`/collection/${id}/`, {
         method: "GET",
         headers: {
           Authorization: `Token ${user.token}`,
@@ -38,10 +38,7 @@ function FriendCollection() {
           "X-CSRFToken": Cookies.get("csrftoken"),
         },
       };
-      let response = await fetch(
-        "http://127.0.0.1:8000/auth/user/profile/",
-        options
-      );
+      let response = await fetch("/auth/user/profile/", options);
       const data = await response.json();
 
       for (let i = 0; i < data.length; i++) {
