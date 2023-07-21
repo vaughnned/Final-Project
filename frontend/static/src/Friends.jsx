@@ -36,7 +36,7 @@ export default function FriendsList() {
       </h1>
 
       {userData
-        .filter((userList) => userList.username !== user.username)
+        .filter((userList) => userList.username !== user.firstName)
         .map((knight, index) => (
           <div key={index} id="friends-list">
             <div>
