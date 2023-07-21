@@ -68,8 +68,8 @@ const Home = () => {
         {games.length <= 0 ? (
           <Loader />
         ) : (
-          games.map((game) => (
-            <section className="whole-card">
+          games.map((game, index) => (
+            <section key={index} className="whole-card">
               <Game game={game} game_id={game.id} key={game.id} owned={false} />
             </section>
           ))

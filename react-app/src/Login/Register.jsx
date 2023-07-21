@@ -87,42 +87,35 @@ const RegisterComponent = () => {
   return (
     <div id="login-page">
       <section id="login-form">
-        <h1>Register</h1>
+        <h1 id="register">Register</h1>
         <form className="login-inputs" onSubmit={handleRegister}>
           Username:
           <input
             type="text"
-            placeholder="username"
+            placeholder="username..."
             value={username}
             onChange={(e) => handleUsernameInput(e)}
           />
           Email:
           <input
             type="email"
-            placeholder="email"
+            placeholder="email..."
             value={email}
             onChange={(e) => handleEmailInput(e)}
           />
           Password:
           <input
             type="password"
-            placeholder="password"
+            placeholder="password..."
             value={password1}
             onChange={(e) => handlePassword1Input(e)}
           />
           Confirm Password:
           <input
             type="password"
-            placeholder="confirm password"
+            placeholder="confirm password..."
             value={password2}
             onChange={(e) => handlePassword2Input(e)}
-          />
-          Profile Pic:
-          <input
-            className="profile-pic"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
           />
           <div id="sign-in">
             <input id="submit-button" type="submit" />|

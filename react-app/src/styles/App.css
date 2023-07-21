@@ -231,9 +231,11 @@
 }
 
 .house-rule-display p {
-  height: fit-content;
+  height: 200px;
+  overflow-x: scroll;
   padding: 5px;
   border: solid 3px black;
+  border-radius: 10px;
 }
 
 #sword-right {
@@ -271,7 +273,7 @@
   margin: 5px;
 }
 
-.friend-details:hover {
+.friend-details a:hover {
   text-decoration: underline;
 }
 
@@ -314,7 +316,7 @@ body {
 #root {
   margin: 0 auto;
   text-align: center;
-  background-image: url("../../public/images/brick-wall.jpeg");
+  background-image: url("../../images/brick-wall.jpeg");
   background-size: 100%;
   background-repeat: repeat;
 }

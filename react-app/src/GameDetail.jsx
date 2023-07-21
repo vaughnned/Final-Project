@@ -18,7 +18,9 @@ function GameDetail() {
   useEffect(() => {
     getPrice(gameId).then((prices) => {
       console.log(prices, "prices");
-      setStores(prices.filter((item) => item.name.includes(game.name)));
+      console.log(game, "prices");
+
+      setStores(prices.filter((item) => item.name.includes(game?.name)));
     });
   }, [gameId, game]);
 
