@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -47,7 +46,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    # 'authentication.apps.AuthenticationConfig',
     'django_app.apps.DjangoAppConfig',
     'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
@@ -167,9 +165,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-# REST_AUTH_REGISTER_SERIALIZERS = {
-#     'REGISTER_SERIALIZER': 'authentication.serializers.CustomRegisterSerializer'
-# }
 
 AUTH_USER_MODEL = 'accounts.User'
 

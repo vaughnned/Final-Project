@@ -32,7 +32,7 @@ export default function FriendsList() {
   return (
     <>
       <h1 id="friend-title" className="title">
-        Companions
+        Companions, Compatriots, etc.
       </h1>
 
       {userData.map((knight, index) => (
