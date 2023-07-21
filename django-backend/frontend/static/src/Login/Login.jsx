@@ -84,7 +84,7 @@ const LoginComponent = () => {
 
       setIsValid(true);
       navigate("/");
-      location.reload();
+      // location.reload();
     }
 
     // if login is valid

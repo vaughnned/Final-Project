@@ -35,6 +35,7 @@ urlpatterns = [
     path("collection/delete/<int:game_id>/", delete_game, name="delete_game"),
     path('accounts/', include("allauth.urls")),
     path('auth/', include("accounts.urls")),
+    path('', include("frontend.urls", namespace="frontend"))
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

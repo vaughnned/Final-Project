@@ -8,11 +8,11 @@ function Game({ game, game_id, owned = true }) {
 
   setTimeout(() => setGameToken(user?.token), 1000);
 
-  useEffect(() => {
-    if (location.pathname === "/") {
-      setHome(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (location.pathname === "/") {
+  //     setHome(true);
+  //   }
+  // }, []);
 
   async function addToCollection(
     e,

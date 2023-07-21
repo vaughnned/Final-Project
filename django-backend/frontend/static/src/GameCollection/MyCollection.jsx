@@ -89,7 +89,6 @@ function CollectionPage() {
     };
 
     await updateGame();
-    await getHouseRules();
   };
 
   const addImage = async (imgSrc, user) => {
@@ -110,7 +109,7 @@ function CollectionPage() {
 
     setUser({ ...currentUser, avatar: data.image });
 
-    location.reload();
+    // location.reload();
     return data;
   };
 

@@ -57,13 +57,7 @@ function FriendCollection() {
     <>
       <div id="profile">
         {}
-        <Avatar
-          src={userData.image}
-          alt="it's me"
-          radius={100}
-          size={200}
-          onClick={open}
-        />
+        <Avatar src={userData.image} alt="it's me" radius={100} size={200} />
       </div>
 
       <h1 className="title">{userData.username}'s Armory</h1>

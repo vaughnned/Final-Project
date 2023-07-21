@@ -316,7 +316,7 @@ body {
 #root {
   margin: 0 auto;
   text-align: center;
-  background-image: url("../../images/brick-wall.jpeg");
+  background-image: url("../images/brick-wall.jpeg");
   background-size: 100%;
   background-repeat: repeat;
 }

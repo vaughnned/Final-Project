@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'django_app.apps.DjangoAppConfig',
     'api.apps.ApiConfig',
     'accounts.apps.AccountsConfig',
-    
+    'frontend.apps.FrontendConfig',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -86,7 +87,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
-        'DIRS': [BASE_DIR / "templates"],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -147,6 +147,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressMainfestStaticFilesStorage"
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "frontend/static/build/static"),)
+REACT_APP_DIR = os.path.join(BASE_DIR, "frontend/static")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
