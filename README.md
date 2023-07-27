@@ -1,4 +1,4 @@
-# Final-Project
+# Game-Knight
 Welcome to Game Knight!
 
 Game Knight is a way to better organize and manage your board game collections,
