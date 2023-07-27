@@ -6,7 +6,7 @@ as well as find more info about games you might be interested in! You can share 
 and much more to come in the near future!
 
 The technologies used to build this app consisted of a React, Javascript frontend with a Django, Django REST Framework, Python backend.
-And for styling I used mostly CSS with minimal help from the Mantine library.
+For styling I used mostly CSS with minimal help from the Mantine library. And for all my board game information needs I used the Board Game Atlas public API.
 
 In order to run my project you can either, go to the live site which is deployed on heroku via "https://game-knight-183e3f967a99.herokuapp.com/" ,
 or you can Clone this Git repository and install the dependencies which are located in a requirements.txt file by using either "npm install" or "pip install".
