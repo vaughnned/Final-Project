@@ -51,7 +51,6 @@ const LoginComponent = () => {
         password: password,
       }),
     };
-    console.log(options.headers, "HEADERS");
 
     const response = await fetch("/auth/login/", options).catch((error) => {
       console.error("THIS ISNT WORKING", error);

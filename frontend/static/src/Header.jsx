@@ -25,6 +25,7 @@ export default function Header() {
       handleError
     );
     if (!response.ok) {
+      console.error(response.body);
       throw new Error("Oops! Something went wrong");
     } else {
       const data = await response.json();

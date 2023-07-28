@@ -71,9 +71,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000/','http://127.0.0.1:8000/']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000/','http://127.0.0.1:8000/', 'https://game-knight-183e3f967a99.herokuapp.com/']
 
-CSRF_COOKIE_DOMAIN = '.localhost'
+# CSRF_COOKIE_DOMAIN = '.localhost', 
 
 CSRF_COOKIE_SAMESITE = 'Lax'
 
@@ -159,7 +159,7 @@ REACT_APP_DIR = os.path.join(BASE_DIR, "frontend/static")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "http://localhost:5173/"
+LOGIN_REDIRECT_URL = "/"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
