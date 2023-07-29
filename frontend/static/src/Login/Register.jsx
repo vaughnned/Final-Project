@@ -38,6 +38,25 @@ const RegisterComponent = () => {
     }));
   };
 
+  const getProfile = async (token, name, email, userId) => {
+    const response = await fetch(`/auth/user/profile/${userId}/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+        "content-type": "application/json",
+        "X-CSRFToken": Cookies.get("csrftoken"),
+      },
+    });
+    const data = await response.json();
+    setUser({
+      firstName: name,
+      email: email,
+      token: token,
+      avatar: data.image,
+      id: userId,
+    });
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -68,12 +87,12 @@ const RegisterComponent = () => {
       console.log({ response });
     } else {
       console.log(data, "data");
-      setUser({
-        firstName: "Vaughn",
-        email: "vaughn@nedderman.com",
-        token: data.key,
-        avatar: "FOO",
-      });
+      await getProfile(
+        data.key,
+        username,
+        "username@example.com",
+        data.profile_id
+      );
 
       console.log(user);
       Cookies.set("Authorization", `Token ${data.key}`);
